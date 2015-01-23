@@ -5,7 +5,7 @@ define [], () ->
 
       @circle = PIXI.Sprite.fromImage "../res/img/square.png"
       @stage.addChild @circle
-      
+
 
     step: () =>
       dt = Date.now() - @lastFrame
@@ -16,4 +16,4 @@ define [], () ->
       @lastFrame += dt
 
     update: (dt) =>
-      @circle.position.x += 50 * Math.sin dt / 1000
+      @circle.position.x = Math.sin(@lastFrame /1000)*300
