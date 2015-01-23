@@ -1,4 +1,4 @@
 define [], () ->
   class B
     say: (msg) ->
-      alert "B says: #{msg}"
+      console.log "B says: #{msg}"

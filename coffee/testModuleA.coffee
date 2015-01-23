@@ -1,4 +1,4 @@
 define [], () ->
   class A
     run: () ->
-      alert "A"
+      console.log "A"
