@@ -1,6 +1,6 @@
 require ['game'], (Game) ->
-  stage = new PIXI.Stage 0xffffff
-  renderer = PIXI.autoDetectRenderer 800, 600
+  stage = new PIXI.Stage 0xdddddd
+  renderer = PIXI.autoDetectRenderer window.innerWidth, window.innerHeight
   gameContainer = new PIXI.DisplayObjectContainer()
 
   stage.addChild gameContainer

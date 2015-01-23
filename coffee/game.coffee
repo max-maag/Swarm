@@ -16,4 +16,4 @@ define [], () ->
       @lastFrame += dt
 
     update: (dt) =>
-      @circle.position.x = Math.sin(@lastFrame /1000)*300
+      @circle.position.x = 300+Math.sin(@lastFrame /1000)*300
