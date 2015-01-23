@@ -9,9 +9,10 @@ define [], () ->
 
     step: () =>
       dt = Date.now() - @lastFrame
+      @lastFrame = Date.now()
       requestAnimFrame @step
       @update dt
-      @render
+      @render()
       @lastFrame += dt
 
     update: (dt) =>
