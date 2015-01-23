@@ -1,7 +1,13 @@
 define [], () ->
   class Swarm
+    ###
+     Swarm class containing entities
+    ###
     constructor: () ->
       @entities = []
 
-    run: () ->
+    ###
+     updates all entities of the swarm
+    ###
+    update: () ->
       entity.toString() for entity in @entities
