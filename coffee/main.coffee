@@ -7,4 +7,10 @@ require ['game'], (Game) ->
   document.body.appendChild renderer.view
 
   game = new Game (() -> renderer.render stage), stage
-  requestAnimFrame game.step
+
+  assetLoader = new PIXI.AssetLoader ["../res/img/square.png"], true
+
+  assetLoader.onComplete = () ->
+    requestAnimFrame game.step
+
+  assetLoader.load()
