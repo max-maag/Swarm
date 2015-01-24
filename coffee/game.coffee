@@ -1,4 +1,4 @@
-define ['world','renderer','movement', 'entityFactory' , 'testFactory' ], (World,Renderer,Movement, EntityFactory, TestFactory) ->
+define ['world','renderer','movement',"swarmSystem", 'entityFactory' , 'testFactory' ], (World,Renderer,Movement, SwarmSystem, EntityFactory, TestFactory) ->
   class Game
     FPSsum = 0
     curFramesCount = 0
@@ -17,10 +17,13 @@ define ['world','renderer','movement', 'entityFactory' , 'testFactory' ], (World
       
       @world = new World()
       
+      @world.addSystem new SwarmSystem
+      @world.addSystem new Movement
       @world.addSystem new Renderer @gameContainer
-      @world.addSystem new Movement 
       
-      @world.addEntity TestFactory.build()
+      
+      for i in [1..50]
+        @world.addEntity TestFactory.build(100+i*1,100)
       
        
 

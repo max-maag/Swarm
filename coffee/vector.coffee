@@ -90,3 +90,6 @@ define [], () ->
 
     @dist: (a, b, res = new Vector()) ->
       res.set(a).sub(b).length()
+      
+    @distSquared: (a, b, res = new Vector()) ->
+      res.set(a).sub(b).lengthSquared()

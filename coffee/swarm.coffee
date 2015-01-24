@@ -1,13 +1,10 @@
-define [], () ->
-  class Swarm
-    ###
-     Swarm class containing entities
-    ###
+define ["component"], (Component) ->
+  class Swarm extends Component
     constructor: () ->
-      @entities = []
-
-    ###
-     updates all entities of the swarm
-    ###
-    update: () ->
-      entity.toString() for entity in @entities
+      @name = "swarm" 
+      
+      @min = 30
+      @max = 50
+      @minForce = 1/10000
+      @maxForce = 1/10000
+    

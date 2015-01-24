@@ -3,12 +3,14 @@ define [
   "entity",
   "position",
   "velocity",
+  "acceleration"
+  "swarm"
   "render"
- ], (EntityFactory, Entity, Position, Velocity, Render) ->
+ ], (EntityFactory, Entity, Position, Velocity, Acceleration,Swarm, Render) ->
   class TestFactory extends EntityFactory
     EntityFactory.register "name" ,new TestFactory()
      
-    @build: () ->
-      new Entity(new Position(100,100), new Velocity(1/200,1/200), new Render(PIXI.Sprite.fromImage "../res/img/swarmentity.png"))
+    @build: (x,y) ->
+      new Entity(new Position(x,y), new Velocity(0,0), new Acceleration(0,0), new Swarm(), new Render(PIXI.Sprite.fromImage "../res/img/swarmentity.png"))
     
     

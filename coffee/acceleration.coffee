@@ -1,5 +1,5 @@
 define ["vector","component"], (Vector, Component) ->
-  class Acceleration
+  class Acceleration extends Component
     
     
     
