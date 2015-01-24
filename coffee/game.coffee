@@ -1,4 +1,4 @@
-define ['world'], (World) ->
+define ['world','renderer','movement', 'entityFactory' , 'testFactory' ], (World,Renderer,Movement, EntityFactory, TestFactory) ->
   class Game
     FPSsum = 0
     curFramesCount = 0
@@ -16,6 +16,13 @@ define ['world'], (World) ->
       @stage.addChild @fpsText
       
       @world = new World()
+      
+      @world.addSystem new Renderer @gameContainer
+      @world.addSystem new Movement 
+      
+      @world.addEntity TestFactory.build()
+      
+       
 
     step: () =>
       dt = Date.now() - @lastFrame
@@ -26,8 +33,6 @@ define ['world'], (World) ->
       @lastFrame += dt
 
     update: (dt) =>
-      console.log("S down "+input.keydown(input.KEY.S))
-      console.log("S hit") if input.keyhit(input.KEY.S)
 
       # FPS
       FPSsum++

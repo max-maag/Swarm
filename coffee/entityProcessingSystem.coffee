@@ -1,5 +1,6 @@
-require ['system'], (System) ->
-  class EntityProcessingSystem
+define ['system'], (System) ->
+  class EntityProcessingSystem extends System
+  
 
     processEntity: (entity, dt) ->
 
