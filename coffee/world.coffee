@@ -9,7 +9,7 @@ define [], () ->
 
     addEntity: (entity) =>
       @entities[entity.id] = entity
-      for s in systems
+      for s in @systems
         s.checkEntity entity
 
     removeEntity: (entity) =>

@@ -16,8 +16,13 @@ define [], () ->
     onEntityRemoved: (entity) ->
  
     checkEntity: (entity) =>
+      console.log "check "
+      console.log entity
       for c in @requiredComponents
-        if entity insanceof c
-          addEntity entity
+        unless entity[c]?
+          console.log "missing " + c 
+          return
+        
+      @addEntity entity
 
     process: (dt) ->

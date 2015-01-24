@@ -1,4 +1,4 @@
-define ['world','renderer','movement', 'entityFactory' ], (World,Renderer,Movement, EntityFactory) ->
+define ['world','renderer','movement', 'entityFactory' , 'testFactory' ], (World,Renderer,Movement, EntityFactory, TestFactory) ->
   class Game
     FPSsum = 0
     curFramesCount = 0
@@ -18,9 +18,9 @@ define ['world','renderer','movement', 'entityFactory' ], (World,Renderer,Moveme
       @world = new World()
       
       @world.addSystem new Renderer @gameContainer
-      @world.addSystem new MovementSystem
+      @world.addSystem new Movement 
       
-      @world.addEntity EntityFactory.for("test").build()
+      @world.addEntity TestFactory.build()
       
        
 

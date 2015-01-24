@@ -2,14 +2,16 @@ define ["entityProcessingSystem", "position","render"], (EntityProcessingSystem,
   class Renderer extends EntityProcessingSystem
   
     constructor : (@container) ->
-      super [Position, Render]
+      super ["position", "render"]
     
     processEntity : (e,dt) -> 
-      e.render.sprite.x = e.position.x
-      e.render.sprite.y = e.position.y
+      e.render.sprite.position.x = e.position.vector.x
+      e.render.sprite.position.y = e.position.vector.y
+      
     
-    onEntityAdded: () ->
-      container.addChild sprite
+    onEntityAdded: (e) =>
+      @container.addChild e.render.sprite
+      #console.log "sprite added"
     
-    onEntityRemoved: () ->
-      container.removeChild sprite
+    onEntityRemoved: (e) =>
+      @container.removeChild e.render.sprite

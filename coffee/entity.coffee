@@ -1,8 +1,8 @@
 define [], () ->
   class Entity
-    @IDs
+    @IDs = 0
     
     constructor: (components...) ->
-      @id = @IDs++
+      @id = Entity.IDs++
       for c in components
         c.addToEntity this
