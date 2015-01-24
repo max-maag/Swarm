@@ -7,7 +7,9 @@ define [
   'fpsCounterFactory'
   'fpsCounterSystem'
   'swarmSystem'
-], (World,Renderer,Movement, EntityFactory, TestFactory, FpsCounterFactory, FpsCounterSystem, SwarmSystem) ->
+  'gravitonFactory'
+  
+], (World,Renderer,Movement, EntityFactory, TestFactory, FpsCounterFactory, FpsCounterSystem, SwarmSystem, GravitonFactory) ->
   class Game
 
     constructor: (@render, @stage, @gameContainer) ->
@@ -18,17 +20,24 @@ define [
       
       @world = new World()
       
-      @world.addSystem new SwarmSystem
+      swarmSystem = new SwarmSystem()
+      @world.addSystem swarmSystem  
+      @world.addSystem new GravitonSystem swarmSystem 
       @world.addSystem new Movement
       @world.addSystem new Renderer @gameContainer
 
       @world.addSystem new FpsCounterSystem @stage
 
       for i in [1..50]
-        @world.addEntity TestFactory.build(100+i*1,100)
+        @world.addEntity TestFactory.build(100+(i*10)%100,100+i*0.2)
+      @world.addEntity GravitonFactory.build 300,300
+
       
       @world.addEntity FpsCounterFactory.build()
       
+
+      
+
        
 
     step: () =>

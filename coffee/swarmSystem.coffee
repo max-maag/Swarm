@@ -14,10 +14,15 @@ define ["entityProcessingSystem","vector","position","acceleration","swarm"], (E
           continue
         
         acc=0
-        if(Vector.distSquared(e.position.vector,o.position.vector) > e.swarm.max * e.swarm.max)
-          acc -= e.swarm.maxForce
-        if(Vector.distSquared(e.position.vector,o.position.vector) < e.swarm.min * e.swarm.min)
-          acc += e.swarm.minForce
+        dist = Vector.distSquared(e.position.vector,o.position.vector) 
+        if(dist > e.swarm.max * e.swarm.max)
+          acc = -e.swarm.maxForce
+        if(dist > e.swarm.lose * e.swarm.lose)
+          acc = 0
+        if(dist < e.swarm.min * e.swarm.min)
+          acc = e.swarm.minForce
+          
+          
         
         if(o.position.vector.x-e.position.vector.x>0 )
           accx -= Math.random() * acc
