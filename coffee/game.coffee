@@ -20,7 +20,7 @@ define ['world'], (World) ->
     step: () =>
       dt = Date.now() - @lastFrame
       requestAnimFrame @step
-      @world.step dt
+      @world.update dt
       @update dt
       @render()
       @lastFrame += dt
