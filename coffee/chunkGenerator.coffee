@@ -4,7 +4,6 @@ define ['perlinNoise'], (PerlinNoise) ->
     Generates a chunk
     ###
     constructor: () ->
-      @perlin = new Perlin 'random seed'
       @perlinNoise = new PerlinNoise Math.random()
 
       @tiles = [
@@ -28,15 +27,15 @@ define ['perlinNoise'], (PerlinNoise) ->
       @param {chunk} chunk the chunk that should be generated
     ###
     generate: (chunk) ->
-
       for x in [0...chunk.tiles.length]
         for y in [0...chunk.tiles[x].length]
           freqSum = 0
           freqSum += tile.frequency for tile in @tiles
 
-          #threshold = freqSum * @perlinNoise.perlin(x+(chunk.offset.x*chunk.dimension), y+(chunk.offset.y*chunk.dimension))
-          threshold = freqSum * @perlin.noise(x,y,0);
-          console.log x+" "+y+" "+threshold
+          perlinRand = @perlinNoise.perlin(x+(chunk.offset.x*chunk.dimension), y+(chunk.offset.y*chunk.dimension))
+          perlinRand = ((perlinRand%1)+1)%1 # perlinRand mod 1
+          threshold = freqSum * perlinRand
+
           freqSum = 0
           choosenTile = @tiles[0]
 
