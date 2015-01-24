@@ -1,5 +1,6 @@
 require ['game'], (Game) ->
   input.init()
+  audioplayer.init()
 
   stage = new PIXI.Stage 0xdddddd
   renderer = PIXI.autoDetectRenderer 999, 562 # ca. 16:9
@@ -9,7 +10,7 @@ require ['game'], (Game) ->
   gameContainer = new PIXI.SpriteBatch()
 
   stage.addChild gameContainer
-  document.body.appendChild renderer.view
+  document.getElementById('canvaswrapper').appendChild renderer.view
 
   game = new Game (() -> renderer.render stage), stage, gameContainer
 

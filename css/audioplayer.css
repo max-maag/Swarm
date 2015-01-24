@@ -1,0 +1,93 @@
+.audioplayer {
+  display: inline-block;
+  width:400px;
+  background-color:#ffcc00;
+  box-shadow:0 0 .5em black;
+  text-align: left;
+  margin:.5em; }
+
+.audioplayer .head {
+  background-color:#ffaa00;
+  padding:.5em; }
+
+.audioplayer .head .title {
+  display:block;
+  font-weight:bold; }
+
+.audioplayer .head .desc {
+  font-style:italic;
+  font-size:0.8em; }
+
+.audioplayer .progressbar {
+  cursor:pointer;
+  box-shadow:0 0 .25em black;
+  background-color:#ffbb00; }
+
+.audioplayer .progressbar .bar {
+  height:.75em; width:30%;
+  background-color:black; }
+
+.audioplayer .body { padding:.5em; }
+
+.audioplayer .audioplayer-button {
+  cursor:pointer;
+  display:inline-block;
+  vertical-align: middle;
+  background-color:black;
+  border:1px solid black;
+  box-shadow:0 0 .25em black;
+  width:2em; height:2em; }
+
+.audioplayer .audioplayer-playbutton.playbutton-paused {
+  background-image: url(../res/img/play.png);
+  background-size: 100%; }
+
+.audioplayer .audioplayer-playbutton.playbutton-playing {
+  background-image: url(../res/img/pause.png);
+  background-size: 100%; }
+
+.audioplayer .audioplayer-nextbutton {
+  background-image: url(../res/img/next.png);
+  background-size: 100%; }
+
+.audioplayer .audioplayer-prevbutton {
+  background-image: url(../res/img/prev.png);
+  background-size: 100%; }
+
+.audioplayer .audioplayer-volumebutton {
+  display:inline-block;
+  vertical-align: middle;
+  background-color:black;
+  border:1px solid black;
+  box-shadow:0 0 .25em black;
+  height:1.5em; min-width:7.5em;
+  padding:.25em; }
+
+.audioplayer .audioplayer-volumebutton-speaker {
+  cursor:pointer;
+  float:left;
+  height:1.5em; width:1.5em;
+  background-image:url(../res/img/speaker.png);
+  background-size:100%; }
+
+.audioplayer .audioplayer-volumebutton-volumebar {
+  margin:.25em .25em .25em 2em;
+  cursor:pointer;
+  box-shadow:0 0 .25em #ffaa00;
+  background-color:white; }
+
+.audioplayer .audioplayer-volumebutton-volumebar .bar {
+  height:15px;
+  margin:0;
+  width:30%;
+  background-color:#ffaa00; }
+
+.audioplayer .audioplayer-durationdesc {
+  display:inline-block;
+  vertical-align: middle;
+  background-color:black;
+  color:white;
+  border:1px solid black;
+  box-shadow:0 0 .25em black;
+  height:1em;
+  padding:.5em; }
