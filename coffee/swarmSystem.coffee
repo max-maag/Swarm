@@ -4,8 +4,8 @@ define ["entityProcessingSystem","vector","position","acceleration","swarm"], (E
       super ["position","acceleration","swarm"]
     
     processEntity : (e,dt) ->
-      accx=0
-      accy=0 
+      accx=(Math.random()*2 - 1)/10000
+      accy=(Math.random()*2 - 1)/10000
       list = Object.keys(@entities)
       for i in [0..9]
         index = Math.round(Math.random() * (list.length-1))
