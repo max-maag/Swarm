@@ -31,10 +31,9 @@ define ["vector"], (Vector) ->
      * @return {vec2} tile offset reltive to this tile
     ###
     toTileOffset(pos) ->
-      [
+      new Vector(
         (Math.floor (pos.x / @tilesize) / @dimension)-(@offset.x*@tilesize),
-        (Math.floor (pos.y / @tilesize) / @dimension)-(@offset.y*@tilesize)
-      ]
+        (Math.floor (pos.y / @tilesize) / @dimension)-(@offset.y*@tilesize))
 
     ###
      * determines if a tile is a wall
