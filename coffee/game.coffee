@@ -42,9 +42,11 @@ define [
 
       @world.addSystem new FpsCounterSystem @stage
 
+
       swarmCount = 50
       for i in [1..swarmCount]
         @world.addEntity TestFactory.build 200 + Math.cos(i/2/Math.PI), 200 + Math.sin(i/2/Math.PI)
+
       
       @world.addEntity FpsCounterFactory.build()
       
