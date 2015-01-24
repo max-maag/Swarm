@@ -4,13 +4,15 @@ define [
   'movement'
   'entityFactory'
   'testFactory'
+  'gravitonFactory'
   'fpsCounterFactory'
   'fpsCounterSystem'
   'swarmSystem'
-  'gravitonFactory'
+  'gravitonSystem'
   'map'
   'vector'
-  ], (World,Renderer,Movement, EntityFactory, TestFactory, FpsCounterFactory, FpsCounterSystem, SwarmSystem, GravitonFactory,Map, Vector) ->
+  ], (World,Renderer,Movement, EntityFactory, TestFactory,GravitonFactory, FpsCounterFactory, FpsCounterSystem, SwarmSystem, GravitonSystem,Map, Vector) ->
+ 
   class Game
 
     constructor: (@render, @stage, @gameContainer) ->
@@ -24,7 +26,7 @@ define [
 
       @world = new World()
 
-      
+    
       swarmSystem = new SwarmSystem()
       @world.addSystem swarmSystem  
       @world.addSystem new GravitonSystem swarmSystem 

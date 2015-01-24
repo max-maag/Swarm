@@ -6,5 +6,4 @@ define ["entityProcessingSystem","position","velocity", "acceleration","vector"]
     
     processEntity : (e,dt) -> 
       e.velocity.vector.add(Vector.mul(e.acceleration.vector, dt))
-      
       e.position.vector.add(Vector.mul(e.velocity.vector, dt))
