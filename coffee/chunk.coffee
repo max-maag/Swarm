@@ -5,16 +5,17 @@ define ["vector","tile"], (Vector,Tile) ->
      * @param  {vec2} @offset (chunk) offset of the chunk
      * @param  {int} @dimension   number of tiles on each axis
      * @param {int} @tilesize size of tiles
-     * @param  {worldGenerator} @worldGen class to create tiles
+     * @param  {chunkGenerator} @chunkGen class to create tiles
     ###
-    constructor: (@offset, @dimension, @tilesize, @worldGen) ->
+    constructor: (@offset, @dimension, @tilesize, @chunkGen) ->
       @tiles=[]
       @tiles = [0...@dimension]
       for x in [0...@tiles.length]
         @tiles[x] = [0...@dimension]
         for y in [0...@tiles[x].length]
-          @tiles[x][y]=new Tiles("none");
-      @reconfigure()
+          @tiles[x][y] = new Tile "none", false
+
+      @reconfigure(@offset)
 
     ###
      * generates chunk at new position
@@ -22,15 +23,14 @@ define ["vector","tile"], (Vector,Tile) ->
     ###
     reconfigure: (offset) ->
       @offset=offset
-
-      @worldGen.generate @
+      @chunkGen.generate @
 
     ###
      * converts a global position to tile offsets
      * @param {vec2} pos position to convert
      * @return {vec2} tile offset reltive to this tile
     ###
-    toTileOffset(pos) ->
+    toTileOffset: (pos) ->
       new Vector(
         (Math.floor (pos.x / @tilesize) / @dimension)-(@offset.x*@tilesize),
         (Math.floor (pos.y / @tilesize) / @dimension)-(@offset.y*@tilesize))
@@ -43,14 +43,14 @@ define ["vector","tile"], (Vector,Tile) ->
     isWall: (offset) ->
       @offset[x][y].isWall()
 
-    toString: () ->
-      res = {}
+    toData: () ->
+      res = []
       for x in [0...@tiles.length]
         for y in [0...@tiles.length]
           ch =
             x: x
             y: y
-            data: @tiles[i].toString()
-          res.chunks.push ch
+            data: @tiles[x][y].toString()
+          res.push ch
 
-      JSON.stringify res
+      return res

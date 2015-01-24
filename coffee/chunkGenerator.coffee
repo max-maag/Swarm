@@ -4,6 +4,7 @@ define ['perlinNoise'], (PerlinNoise) ->
     Generates a chunk
     ###
     constructor: () ->
+      @perlin = new Perlin 'random seed'
       @perlinNoise = new PerlinNoise Math.random()
 
       @tiles = [
@@ -24,26 +25,24 @@ define ['perlinNoise'], (PerlinNoise) ->
 
     ###
       returns an (generated) chunk
-      @param {chunk} @chunk the chunk that should be generated
+      @param {chunk} chunk the chunk that should be generated
     ###
-    generate: (@chunk) ->
-      tiles = [0...@chunk.dim.x]
-      for _, x in tiles
-        tiles[x] = [0...@chunk.dim.y]
+    generate: (chunk) ->
 
-        for _, y in tiles[x]
+      for x in [0...chunk.tiles.length]
+        for y in [0...chunk.tiles[x].length]
           freqSum = 0
           freqSum += tile.frequency for tile in @tiles
 
-          threshold = freqSum * @perlinNoise.perlin(x*@chunk.offset.x*@chunk.dim.x, y*@chunk.offset.y*@chunk.dim.y)
+          #threshold = freqSum * @perlinNoise.perlin(x+(chunk.offset.x*chunk.dimension), y+(chunk.offset.y*chunk.dimension))
+          threshold = freqSum * @perlin.noise(x,y,0);
+          console.log x+" "+y+" "+threshold
           freqSum = 0
-          choosenTile = 0
+          choosenTile = @tiles[0]
 
           for tile in @tiles
             freqSum += tile.frequency
-            if freqSum >= threshold then break
             choosenTile = tile
+            if freqSum >= threshold then break
 
-          tiles[x][y].update choosenTile.name, choosenTile.isWall
-
-      return tiles
+          chunk.tiles[x][y].update choosenTile.name, choosenTile.isWall

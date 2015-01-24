@@ -1,20 +1,23 @@
 define [], () ->
-	class Tile
-		@textureCache = {}
+  class Tile
+    ###
+    Creates a Tile
+    @param {string} @name tile name
+    @param {boolean} @isWall true if the player can walk over this tile
+    ###
+    constructor: (@name, @isWall) ->
+      @textureCache = {}
+      @sprite = new PIXI.Sprite()
+      @update @name, @isWall
 
-		###
-		Creates a Tile
-		@param {string} @name tile name
-		@param {boolean} @isWall true if the player can walk over this tile
-		###
-		constructor: (@name, @isWall) ->
-			update @name, @isWall
+    update: (name, isWall) ->
+      @name = name
+      @isWall = isWall
 
-		update: (@name, @isWall) ->
-			if !(@name in @textureCache)
-				@textureCache[@name] = PIXI.Texture.fromImage "../res/img/tile_"+@name+".png"
+      if !(@name in @textureCache)
+        @textureCache[@name] = PIXI.Texture.fromImage "../res/img/tile_"+@name+".png"
 
-			@sprite = PIXI.Sprite.setTexture @textureCache[@name]
+      @sprite.setTexture @textureCache[@name]
 
-		toString: () ->
-			return @name
+    toString: () ->
+      return @name

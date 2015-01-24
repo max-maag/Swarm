@@ -1,4 +1,4 @@
-define ["vector"], (Vector) ->
+define ["vector", "chunk", "chunkGenerator"], (Vector, Chunk, ChunkGen) ->
   class Map
     ###
      * represents a world of chunks
@@ -7,19 +7,21 @@ define ["vector"], (Vector) ->
      * @param  {int} @chunkDim        number of tiles on each chunk axis
      * @param  {int} @tileSize        size of each tile
     ###
-    constructor: (@position, @chunkThreshold, @chunkDim, @tileSize, @worldGen) ->
+    constructor: (@position, @chunkThreshold, @chunkDim, @tileSize) ->
+      @chunkGen = new ChunkGen();
+
       @chunks = [0...@chunkThreshold]
-      for _, x in @offset
-        @chunks = [0...@chunkThreshold]
-        for _, y in @chunks[x]
-          @offset[x][y]=new Chunk((new Vector x, y), @chunkDim, @tilesize, @worldGen)
+      for x in [0...@chunks.length]
+        @chunks[x] = [0...@chunkThreshold]
+        for y in [0...@chunks[x].length]
+          @chunks[x][y]=new Chunk((new Vector x, y), @chunkDim, @tilesize, @chunkGen)
 
       @bounds=@calculateBounds()
 
     calculateBounds: () ->
       mapSize = ((@chunkDim*@tileSize)*@chunkThreshold)
-      topLeft =@.toChunkOffset Vector.sub @position, (new Vector mapSize mapSize)
-      botRight=@.toChunkOffset Vector.add @position, (new Vector mapSize mapSize)
+      topLeft =@.toChunkOffset Vector.sub @position, (new Vector mapSize, mapSize)
+      botRight=@.toChunkOffset Vector.add @position, (new Vector mapSize, mapSize)
 
       bounds =
         tl : topLeft
@@ -88,9 +90,9 @@ define ["vector"], (Vector) ->
      * @return {vec2}          chunk coordinates
     ###
     toChunkOffset: (position) ->
-      vector = new Vector(@tilesize)
+      vector = new Vector(position)
       vector.mul (1/@tileSize)
-      vector.forEach Math.floor
+      vector.foreach Math.floor
       vector.mul (1/@chunkDim)
 
     toString: () ->
@@ -99,7 +101,6 @@ define ["vector"], (Vector) ->
         chunkThreshold: @chunkThreshold,
         chunkDim: @chunkDim,
         tileSize: @tileSize,
-        worldGen: @worldGen,
         chunks: []
 
       for x in [0...@chunks.length]
@@ -107,7 +108,7 @@ define ["vector"], (Vector) ->
           ch =
             x: x
             y: y
-            data: @chunks[i].toString()
+            data: @chunks[x][y].toData()
           res.chunks.push ch
 
       JSON.stringify res

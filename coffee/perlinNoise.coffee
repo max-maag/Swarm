@@ -10,5 +10,5 @@ define ["vector"], (Vector) ->
     perlin: (x,y) ->
       n = x + y * 57 + @seed;
       n = ( n << 13 ) ^ n;
-      rand = 1 - ( (n * (n * n * 15731 + 789221) + 1376312589) & $7fffffff) / 1073741824;
+      rand = 1 - ( (n * (n * n * 15731 + 789221) + 1376312589) & 0x7fffffff) / 1073741824;
       return rand
