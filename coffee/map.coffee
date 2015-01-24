@@ -14,7 +14,6 @@ define ["vector", "chunk", "chunkGenerator"], (Vector, Chunk, ChunkGen) ->
       for x in [0...@chunks.length]
         @chunks[x] = [0...@chunkThreshold]
         for y in [0...@chunks[x].length]
-          console.log "test4"
           @chunks[x][y]=new Chunk (new Vector x, y), @chunkDim, @tileSize, @chunkGen, @gameContainer
 
       @bounds=@calculateBounds()
