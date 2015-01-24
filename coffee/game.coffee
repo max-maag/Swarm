@@ -6,8 +6,12 @@ define [], () ->
       @circle = PIXI.Sprite.fromImage "../res/img/square.png"
       @stage.addChild @circle
 
-
     step: () =>
+      console.log("S down "+input.keydown(input.KEY.S));
+      console.log("S hit") if input.keyhit(input.KEY.S)
+      input.flushkeys();
+
+
       dt = Date.now() - @lastFrame
       @lastFrame = Date.now()
       requestAnimFrame @step
