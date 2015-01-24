@@ -4,26 +4,38 @@ define [
   'movement'
   'entityFactory'
   'testFactory'
+  'gravitonFactory'
   'fpsCounterFactory'
   'fpsCounterSystem'
   'swarmSystem'
   'inputSystem'
   'inputEvent'
   'entity'
+  'gravitonSystem'
+  'map'
+  'vector'
 ], (
-  World, Renderer, Movement, EntityFactory, TestFactory, FpsCounterFactory,
-  FpsCounterSystem, SwarmSystem, InputSystem, InputEvent, Entity) ->
+  World, Renderer, Movement, EntityFactory, TestFactory, GravitonFactory, FpsCounterFactory,
+  FpsCounterSystem, SwarmSystem, InputSystem, InputEvent, Entity, GravitonSystem, Map, Vector) ->
+ 
   class Game
 
     constructor: (@render, @stage, @gameContainer) ->
       @lastFrame = Date.now()
 
-      @circle = PIXI.Sprite.fromImage "../res/img/square.png"
-      @gameContainer.addChild @circle
-      
+      pos = new Vector(0, 0)
+      tres = 5
+      dim = 3
+      tilesize = 50
+      map = new Map(pos, tres, dim, tilesize, @gameContainer)
+
       @world = new World()
-      
-      @world.addSystem new SwarmSystem
+
+    
+      swarmSystem = new SwarmSystem()
+      @world.addSystem swarmSystem  
+      @world.addSystem new GravitonSystem swarmSystem 
+
       @world.addSystem new Movement
       @world.addSystem new Renderer @gameContainer
       @world.addSystem new InputSystem @world
@@ -40,6 +52,7 @@ define [
         @world.addEntity new Entity(new InputEvent(event))
       
        
+      @world.addEntity GravitonFactory.build 300,300
 
     step: () =>
       dt = Date.now() - @lastFrame
@@ -50,6 +63,4 @@ define [
       @lastFrame += dt
 
     update: (dt) =>
-      @circle.position.x = 300+Math.sin(@lastFrame /1000)*300
-
       input.flushkeys()

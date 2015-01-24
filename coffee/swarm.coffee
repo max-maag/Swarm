@@ -2,9 +2,9 @@ define ["component"], (Component) ->
   class Swarm extends Component
     constructor: () ->
       @name = "swarm" 
-      
-      @min = 20
-      @max = 30
-      @minForce = 1/20000
+      @min = 30
+      @max = 50
+      @lose = 300
+      @minForce = 1/10000
       @maxForce = 1/10000
     

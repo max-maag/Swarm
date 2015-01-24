@@ -7,14 +7,13 @@ define ["vector","tile"], (Vector,Tile) ->
      * @param {int} @tilesize size of tiles
      * @param  {chunkGenerator} @chunkGen class to create tiles
     ###
-    constructor: (@offset, @dimension, @tilesize, @chunkGen) ->
+    constructor: (@offset, @dimension, @tilesize, @chunkGen, @gameContainer) ->
       @tiles=[]
       @tiles = [0...@dimension]
       for x in [0...@tiles.length]
         @tiles[x] = [0...@dimension]
         for y in [0...@tiles[x].length]
-          @tiles[x][y] = new Tile "none", false
-
+          @tiles[x][y] = new Tile "none", false, @gameContainer, new Vector(), @tilesize
       @reconfigure(@offset)
 
     ###
@@ -24,6 +23,14 @@ define ["vector","tile"], (Vector,Tile) ->
     reconfigure: (offset) ->
       @offset=offset
       @chunkGen.generate @
+
+      posPerChunk = @dimension*@tilesize
+      chunkVec = new Vector @offset.x*posPerChunk, @offset.y*posPerChunk
+      for x in [0...@tiles.length]
+        for y in [0...@tiles[x].length]
+          pos = new Vector x*@tilesize, y*@tilesize
+          tilePos = Vector.add chunkVec, pos
+          @tiles[x][y].updatePos tilePos
 
     ###
      * converts a global position to tile offsets
