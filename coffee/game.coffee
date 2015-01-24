@@ -8,21 +8,27 @@ define [
   'fpsCounterSystem'
   'swarmSystem'
   'gravitonFactory'
-  
-], (World,Renderer,Movement, EntityFactory, TestFactory, FpsCounterFactory, FpsCounterSystem, SwarmSystem, GravitonFactory) ->
+  'map'
+  'vector'
+  ], (World,Renderer,Movement, EntityFactory, TestFactory, FpsCounterFactory, FpsCounterSystem, SwarmSystem, GravitonFactory,Map, Vector) ->
   class Game
 
     constructor: (@render, @stage, @gameContainer) ->
       @lastFrame = Date.now()
 
-      @circle = PIXI.Sprite.fromImage "../res/img/square.png"
-      @gameContainer.addChild @circle
-      
+      pos = new Vector(0, 0)
+      tres = 5
+      dim = 3
+      tilesize = 50
+      map = new Map(pos, tres, dim, tilesize, @gameContainer)
+
       @world = new World()
+
       
       swarmSystem = new SwarmSystem()
       @world.addSystem swarmSystem  
       @world.addSystem new GravitonSystem swarmSystem 
+
       @world.addSystem new Movement
       @world.addSystem new Renderer @gameContainer
 
@@ -36,9 +42,7 @@ define [
       @world.addEntity FpsCounterFactory.build()
       
 
-      
-
-       
+     
 
     step: () =>
       dt = Date.now() - @lastFrame
@@ -49,6 +53,4 @@ define [
       @lastFrame += dt
 
     update: (dt) =>
-      @circle.position.x = 300+Math.sin(@lastFrame /1000)*300
-
       input.flushkeys()

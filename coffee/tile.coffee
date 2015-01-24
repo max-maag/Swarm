@@ -5,9 +5,14 @@ define [], () ->
     @param {string} @name tile name
     @param {boolean} @isWall true if the player can walk over this tile
     ###
-    constructor: (@name, @isWall) ->
+    constructor: (@name, @isWall, @gameContainer, @pos, @size) ->
       @textureCache = {}
       @sprite = new PIXI.Sprite()
+      @sprite.width = @size/256
+      @sprite.height= @size/256
+
+
+      @gameContainer.addChild @sprite
       @update @name, @isWall
 
     update: (name, isWall) ->
@@ -19,5 +24,11 @@ define [], () ->
 
       @sprite.setTexture @textureCache[@name]
 
+    updatePos: (pos) ->
+      @pos=pos
+      @sprite.position.x = @pos.x
+      @sprite.position.y = @pos.y
+
+
     toString: () ->
-      return @name
+      return @name+": ["+@pos.x+","+@pos.y+"]"

@@ -7,14 +7,15 @@ define ["vector", "chunk", "chunkGenerator"], (Vector, Chunk, ChunkGen) ->
      * @param  {int} @chunkDim        number of tiles on each chunk axis
      * @param  {int} @tileSize        size of each tile
     ###
-    constructor: (@position, @chunkThreshold, @chunkDim, @tileSize) ->
+    constructor: (@position, @chunkThreshold, @chunkDim, @tileSize, @gameContainer) ->
       @chunkGen = new ChunkGen();
 
       @chunks = [0...@chunkThreshold]
       for x in [0...@chunks.length]
         @chunks[x] = [0...@chunkThreshold]
         for y in [0...@chunks[x].length]
-          @chunks[x][y]=new Chunk((new Vector x, y), @chunkDim, @tilesize, @chunkGen)
+          console.log "test4"
+          @chunks[x][y]=new Chunk (new Vector x, y), @chunkDim, @tileSize, @chunkGen, @gameContainer
 
       @bounds=@calculateBounds()
 
@@ -44,7 +45,7 @@ define ["vector", "chunk", "chunkGenerator"], (Vector, Chunk, ChunkGen) ->
           #moved right
           for i in [0...diff.x.length] by 1
             column = @chunks.shift()
-            newX = @column[@column.length -1].offset.x +1
+            newX = @column[@column.length-1].offset.x+1
             @chunks.push column
 
             for y in column
@@ -53,7 +54,7 @@ define ["vector", "chunk", "chunkGenerator"], (Vector, Chunk, ChunkGen) ->
           #moved left
           for i in [0...diff.x.length] by 1
             column = @chunks.pop()
-            newX = @column[0].offset.x - 1
+            newX = @column[0].offset.x-1
             @chunks.unshift column
 
             for y in column
@@ -63,7 +64,7 @@ define ["vector", "chunk", "chunkGenerator"], (Vector, Chunk, ChunkGen) ->
         #need to generate new chunks
         if diff.y<0
           #moved up
-          newY = @column[0][0].offset.y - 1
+          newY = @column[0][0].offset.y-1
           for x in [0...@chunks.length] by 1
             column = @chunks[x]
             for y in [0...diff.y] by 1
@@ -73,7 +74,7 @@ define ["vector", "chunk", "chunkGenerator"], (Vector, Chunk, ChunkGen) ->
               shift.reconfigure (new Vector x, (newY + y)) #minus because diff.y is negative
         else
           #moved down
-          newY = @column[0][@column[0].length -1 ].offset.y +1
+          newY = @column[0][@column[0].length-1].offset.y+1
           for x in [0...@chunks.length] by 1
             column = @chunks[x]
             for y in [0...diff.y] by 1
