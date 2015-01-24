@@ -1,4 +1,10 @@
+require.config({
+  urlArgs: "bust=" + (new Date()).getTime()
+});
+
 require ['game'], (Game) ->
+  input.init()
+  
   stage = new PIXI.Stage 0xdddddd
   renderer = PIXI.autoDetectRenderer window.innerWidth, window.innerHeight
   gameContainer = new PIXI.DisplayObjectContainer()
