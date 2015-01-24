@@ -42,3 +42,15 @@ define ["vector","tile"], (Vector,Tile) ->
     ###
     isWall: (offset) ->
       @offset[x][y].isWall()
+
+    toString: () ->
+      res = {}
+      for x in [0...@tiles.length]
+        for y in [0...@tiles.length]
+          ch =
+            x: x
+            y: y
+            data: @tiles[i].toString()
+          res.chunks.push ch
+
+      JSON.stringify res

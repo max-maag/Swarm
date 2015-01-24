@@ -92,3 +92,22 @@ define ["vector"], (Vector) ->
       vector.mul (1/@tileSize)
       vector.forEach Math.floor
       vector.mul (1/@chunkDim)
+
+    toString: () ->
+      res =
+        position: @position,
+        chunkThreshold: @chunkThreshold,
+        chunkDim: @chunkDim,
+        tileSize: @tileSize,
+        worldGen: @worldGen,
+        chunks: []
+
+      for x in [0...@chunks.length]
+        for y in [0...@chunks.length]
+          ch =
+            x: x
+            y: y
+            data: @chunks[i].toString()
+          res.chunks.push ch
+
+      JSON.stringify res
