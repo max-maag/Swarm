@@ -86,3 +86,6 @@ define [], () ->
 
     @dot: (a, b, res = new Vector()) ->
       res.set(a).dot(b)
+
+    @dist: (a, b, res = new Vector()) ->
+      res.set(a).sub(b).length()
