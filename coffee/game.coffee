@@ -4,11 +4,11 @@ define [], () ->
     curFramesCount = 0
     curSeconds = 0
 
-    constructor: (@render, @stage) ->
+    constructor: (@render, @stage, @gameContainer) ->
       @lastFrame = Date.now()
 
       @circle = PIXI.Sprite.fromImage "../res/img/square.png"
-      @stage.addChild @circle
+      @gameContainer.addChild @circle
 
       @fpsText = new PIXI.Text("-- FPS", {font:"20px Arial", fill:"red"});
       @fpsText.position.x = 10;

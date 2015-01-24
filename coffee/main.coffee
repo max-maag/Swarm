@@ -8,7 +8,7 @@ require ['game'], (Game) ->
   stage.addChild gameContainer
   document.body.appendChild renderer.view
 
-  game = new Game (() -> renderer.render stage), gameContainer
+  game = new Game (() -> renderer.render stage), stage, gameContainer
 
   assetLoader = new PIXI.AssetLoader ["../res/img/square.png"], true
 
