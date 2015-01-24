@@ -1,4 +1,7 @@
 define [], () ->
+  ###
+    Methods like add, sub and dot can either take (number, number), (PIXI.Point) or (Vector).
+  ###
   class Vector
     _handleArg: (v, handler) ->
       t = typeof v
