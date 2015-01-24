@@ -8,8 +8,9 @@ define [], () ->
       @onEntityAdded entity
       
     removeEntity: (entity) =>
-      @onEntityRemoved entity
-      delete @entities[entity.id]
+      if @entities[entity.id]?
+        @onEntityRemoved entity
+        delete @entities[entity.id]
       
     onEntityAdded: (entity) ->
     

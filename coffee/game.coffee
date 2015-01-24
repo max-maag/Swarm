@@ -8,10 +8,15 @@ define [
   'fpsCounterFactory'
   'fpsCounterSystem'
   'swarmSystem'
+  'inputSystem'
+  'inputEvent'
+  'entity'
   'gravitonSystem'
   'map'
   'vector'
-  ], (World,Renderer,Movement, EntityFactory, TestFactory,GravitonFactory, FpsCounterFactory, FpsCounterSystem, SwarmSystem, GravitonSystem,Map, Vector) ->
+], (
+  World, Renderer, Movement, EntityFactory, TestFactory, GravitonFactory, FpsCounterFactory,
+  FpsCounterSystem, SwarmSystem, InputSystem, InputEvent, Entity, GravitonSystem, Map, Vector) ->
  
   class Game
 
@@ -33,18 +38,21 @@ define [
 
       @world.addSystem new Movement
       @world.addSystem new Renderer @gameContainer
+      @world.addSystem new InputSystem @world
 
       @world.addSystem new FpsCounterSystem @stage
 
-      for i in [1..50]
-        @world.addEntity TestFactory.build(100+(i*10)%100,100+i*0.2)
-      @world.addEntity GravitonFactory.build 300,300
-
+      swarmCount = 50
+      for i in [1..swarmCount]
+        @world.addEntity TestFactory.build 200 + Math.cos(i/2/Math.PI), 200 + Math.sin(i/2/Math.PI)
       
       @world.addEntity FpsCounterFactory.build()
       
-
-     
+      window.onmousedown = (event) =>
+        @world.addEntity new Entity(new InputEvent(event))
+      
+       
+      @world.addEntity GravitonFactory.build 300,300
 
     step: () =>
       dt = Date.now() - @lastFrame
