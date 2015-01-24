@@ -7,7 +7,12 @@ define [
   'fpsCounterFactory'
   'fpsCounterSystem'
   'swarmSystem'
-], (World,Renderer,Movement, EntityFactory, TestFactory, FpsCounterFactory, FpsCounterSystem, SwarmSystem) ->
+  'inputSystem'
+  'inputEvent'
+  'entity'
+], (
+  World, Renderer, Movement, EntityFactory, TestFactory, FpsCounterFactory,
+  FpsCounterSystem, SwarmSystem, InputSystem, InputEvent, Entity) ->
   class Game
 
     constructor: (@render, @stage, @gameContainer) ->
@@ -21,13 +26,18 @@ define [
       @world.addSystem new SwarmSystem
       @world.addSystem new Movement
       @world.addSystem new Renderer @gameContainer
+      @world.addSystem new InputSystem @world
 
       @world.addSystem new FpsCounterSystem @stage
 
-      for i in [1..50]
-        @world.addEntity TestFactory.build(100+i*1,100)
+      swarmCount = 50
+      for i in [1..swarmCount]
+        @world.addEntity TestFactory.build 200 + Math.cos(i/2/Math.PI), 200 + Math.sin(i/2/Math.PI)
       
       @world.addEntity FpsCounterFactory.build()
+      
+      window.onmousedown = (event) =>
+        @world.addEntity new Entity(new InputEvent(event))
       
        
 
