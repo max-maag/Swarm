@@ -16,7 +16,7 @@ define [], () ->
     constructor: (x, y) ->
       @x = 0
       @y = 0
- 
+
       @_handleArg x,
         'number': () => @set x, y
         'object': () => @set x.x, x.y
@@ -73,6 +73,8 @@ define [], () ->
 
     length: () => Math.sqrt @lengthSquared()
 
+    toString: () =>
+      "["+@x+","+@y+"]"
 
     # Static function #
 
@@ -90,6 +92,6 @@ define [], () ->
 
     @dist: (a, b, res = new Vector()) ->
       res.set(a).sub(b).length()
-      
+
     @distSquared: (a, b, res = new Vector()) ->
       res.set(a).sub(b).lengthSquared()

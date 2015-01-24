@@ -7,17 +7,24 @@ define [
   'fpsCounterFactory'
   'fpsCounterSystem'
   'swarmSystem'
-], (World,Renderer,Movement, EntityFactory, TestFactory, FpsCounterFactory, FpsCounterSystem, SwarmSystem) ->
+  'map'
+  'mapSystem'
+  'vector'
+], (World,Renderer,Movement, EntityFactory, TestFactory, FpsCounterFactory, FpsCounterSystem, SwarmSystem, Map, MapSystem, Vector) ->
   class Game
 
     constructor: (@render, @stage, @gameContainer) ->
       @lastFrame = Date.now()
 
-      @circle = PIXI.Sprite.fromImage "../res/img/square.png"
-      @gameContainer.addChild @circle
-      
+      pos = new Vector(0, 0)
+      tres = 5
+      dim = 3
+      tilesize = 50
+      map = new Map(pos, tres, dim, tilesize, @gameContainer)
+      console.log toString()
+
       @world = new World()
-      
+
       @world.addSystem new SwarmSystem
       @world.addSystem new Movement
       @world.addSystem new Renderer @gameContainer
@@ -26,10 +33,9 @@ define [
 
       for i in [1..50]
         @world.addEntity TestFactory.build(100+i*1,100)
-      
+
       @world.addEntity FpsCounterFactory.build()
-      
-       
+
 
     step: () =>
       dt = Date.now() - @lastFrame
@@ -40,6 +46,4 @@ define [
       @lastFrame += dt
 
     update: (dt) =>
-      @circle.position.x = 300+Math.sin(@lastFrame /1000)*300
-
       input.flushkeys()
