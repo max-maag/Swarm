@@ -25,8 +25,8 @@ define [], () ->
     # Member functions #
 
     foreach: (f) =>
-      f @x
-      f @y
+      @x = f @x
+      @y = f @y
 
     set: (x, y) =>
       @_handleArg x,
