@@ -3,8 +3,8 @@ define ["component"], (Component) ->
     constructor: () ->
       @name = "swarm" 
       
-      @min = 30
-      @max = 50
-      @minForce = 1/10000
+      @min = 20
+      @max = 30
+      @minForce = 1/20000
       @maxForce = 1/10000
     
