@@ -1,4 +1,4 @@
-define [], () ->
+define ['world'], (World) ->
   class Game
     FPSsum = 0
     curFramesCount = 0
@@ -14,6 +14,8 @@ define [], () ->
       @fpsText.position.x = 10
       @fpsText.position.y = 10
       @stage.addChild @fpsText
+      
+      @world = new World()
 
     step: () =>
       dt = Date.now() - @lastFrame
