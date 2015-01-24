@@ -10,9 +10,9 @@ define [], () ->
       @circle = PIXI.Sprite.fromImage "../res/img/square.png"
       @gameContainer.addChild @circle
 
-      @fpsText = new PIXI.Text("-- FPS", {font:"20px Arial", fill:"red"});
-      @fpsText.position.x = 10;
-      @fpsText.position.y = 10;
+      @fpsText = new PIXI.Text "-- FPS", {font:"20px Arial", fill:"red"}
+      @fpsText.position.x = 10
+      @fpsText.position.y = 10
       @stage.addChild @fpsText
 
     step: () =>
@@ -31,7 +31,7 @@ define [], () ->
       FPSsum++
       curTime = new Date()
       if (curSeconds == curTime.getSeconds())
-        curFramesCount++;
+        curFramesCount++
       else
         @fpsText.setText curFramesCount+" FPS"
         curFramesCount = 1

@@ -3,6 +3,9 @@ require ['game'], (Game) ->
 
   stage = new PIXI.Stage 0xdddddd
   renderer = PIXI.autoDetectRenderer window.innerWidth, window.innerHeight
+  window.onresize = () ->
+    renderer.resize window.innerWidth, window.innerHeight
+
   gameContainer = new PIXI.SpriteBatch()
 
   stage.addChild gameContainer
