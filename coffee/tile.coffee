@@ -15,3 +15,6 @@ define [], () ->
 				@textureCache[@name] = PIXI.Texture.fromImage "../res/img/tile_"+@name+".png"
 
 			@sprite = PIXI.Sprite.setTexture @textureCache[@name]
+
+		toString: () ->
+			return @name
