@@ -1,17 +1,21 @@
 define [], () ->
   class Game
+    FPSsum = 0
+    curFramesCount = 0
+    curSeconds = 0
+
     constructor: (@render, @stage) ->
       @lastFrame = Date.now()
 
       @circle = PIXI.Sprite.fromImage "../res/img/square.png"
       @stage.addChild @circle
 
+      @fpsText = new PIXI.Text("-- FPS", {font:"20px Arial", fill:"red"});
+      @fpsText.position.x = 10;
+      @fpsText.position.y = 10;
+      @stage.addChild @fpsText
+
     step: () =>
-      console.log("S down "+input.keydown(input.KEY.S));
-      console.log("S hit") if input.keyhit(input.KEY.S)
-      input.flushkeys();
-
-
       dt = Date.now() - @lastFrame
       @lastFrame = Date.now()
       requestAnimFrame @step
@@ -20,4 +24,19 @@ define [], () ->
       @lastFrame += dt
 
     update: (dt) =>
+      console.log("S down "+input.keydown(input.KEY.S))
+      console.log("S hit") if input.keyhit(input.KEY.S)
+
+      # FPS
+      FPSsum++
+      curTime = new Date()
+      if (curSeconds == curTime.getSeconds())
+        curFramesCount++;
+      else
+        @fpsText.setText curFramesCount+" FPS"
+        curFramesCount = 1
+        curSeconds = curTime.getSeconds()
+
       @circle.position.x = 300+Math.sin(@lastFrame /1000)*300
+
+      input.flushkeys()

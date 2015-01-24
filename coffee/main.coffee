@@ -4,7 +4,7 @@ require.config({
 
 require ['game'], (Game) ->
   input.init()
-  
+
   stage = new PIXI.Stage 0xdddddd
   renderer = PIXI.autoDetectRenderer window.innerWidth, window.innerHeight
   gameContainer = new PIXI.DisplayObjectContainer()
@@ -13,6 +13,7 @@ require ['game'], (Game) ->
   document.body.appendChild renderer.view
 
   game = new Game (() -> renderer.render stage), stage
+  console.log(game);
 
   assetLoader = new PIXI.AssetLoader ["../res/img/square.png"], true
 
