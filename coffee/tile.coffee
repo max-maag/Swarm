@@ -1,5 +1,7 @@
 define [], () ->
 	class Tile
+		@textureCache = {}
+
 		###
 		Creates a Tile
 		@param {string} @name tile name
@@ -9,4 +11,7 @@ define [], () ->
 			update @name, @isWall
 
 		update: (@name, @isWall) ->
-			@sprite = PIXI.Sprite.fromImage "../res/img/tile_"+@name+".png"
+			if !(@name in @textureCache)
+				@textureCache[@name] = PIXI.Texture.fromImage "../res/img/tile_"+@name+".png"
+
+			@sprite = PIXI.Sprite.setTexture @textureCache[@name]
