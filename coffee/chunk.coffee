@@ -19,9 +19,9 @@ define ["vector"], (Vector) ->
       @offset=offset
 
       @tiles = [0..@dimension]
-      for x in [0..@offset]
+      for _, x in [0..@offset]
         @tiles[x] = [0...@dimension]
-        for y in [0..@dimension]
+        for _, y in [0..@dimension]
           @tiles[x][y].remove()
           @tiles[x][y]=@worldGen.generate @ (new Vector x, y)
 

@@ -9,9 +9,9 @@ define ["vector"], (Vector) ->
     ###
     constructor: (@position, @chunkThreshold, @chunkDim, @tileSize, @worldGen) ->
       @chunks = [0..@chunkThreshold]
-      for x in @offset
+      for _, x in @offset
         @chunks = [0...@chunkThreshold]
-        for y in @chunks[x]
+        for _, y in @chunks[x]
           @offset[x][y]=new Chunk((new Vector x, y), @chunkDim, @tilesize, @worldGen)
 
       @bounds=@calculateBounds()
@@ -40,21 +40,21 @@ define ["vector"], (Vector) ->
         #need to generate new chunks
         if diff.x>0
           #moved right
-          for i in [0..diff.x] by 1
+          for _, i in [0..diff.x] by 1
             column = @chunks.shift()
             newX = @column[@column.length -1].offset.x +1
             @chunks.push column
 
-            for y in column
+            for _, y in column
               column[y].reconfigure (new Vector newX, y)
         else
           #moved left
-          for i in [0..diff.x] by 1
+          for _, i in [0..diff.x] by 1
             column = @chunks.pop()
             newX = @column[0].offset.x - 1
             @chunks.unshift column
 
-            for y in column
+            for _, y in column
               column[y].reconfigure (new Vector newX, y)
 
       if (diff.y!=0)
@@ -62,9 +62,9 @@ define ["vector"], (Vector) ->
         if diff.y<0
           #moved up
           newY = @column[0][0].offset.y - 1
-          for x in [0..@chunks] by 1
+          for _, x in [0..@chunks] by 1
             column = @chunks[x]
-            for y in [0..diff.y] by 1
+            for _, y in [0..diff.y] by 1
               shift = @column.pop()
               @column.unshift shift
               
@@ -72,9 +72,9 @@ define ["vector"], (Vector) ->
         else
           #moved down
           newY = @column[0][@column[0].length -1 ].offset.y +1
-          for x in [0..@chunks] by 1
+          for _, x in [0..@chunks] by 1
             column = @chunks[x]
-            for y in [0..diff.y] by 1
+            for _, y in [0..diff.y] by 1
               shift = @column.shift()
               @column.push shift
               
