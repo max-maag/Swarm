@@ -5,7 +5,7 @@ define [], () ->
   class Vector
     _handleArg: (v, handler) ->
       t = typeof v
-      if(t in handler)
+      if handler[t]?
         handler[t]()
       else
         console.error "unexpected argument of type #{t}"
@@ -16,10 +16,10 @@ define [], () ->
     constructor: (x, y) ->
       @x = 0
       @y = 0
- 
-      _handleArg x
-        'number': () -> set x, y
-        'object': () -> set x.x, x.y
+
+      @_handleArg x,
+        'number': () => @set x, y
+        'object': () => @set x.x, x.y
 
     # Member functions #
 
@@ -28,7 +28,7 @@ define [], () ->
       f @y
 
     set: (x, y) =>
-      _handleArg x
+      @_handleArg x,
         'number': () ->
           @x = x
           @y = y
@@ -39,7 +39,7 @@ define [], () ->
       return this
 
     add: (x, y) =>
-      _handleArg x
+      @_handleArg x,
         'number': () ->
           @x += x
           @x += y
@@ -50,7 +50,7 @@ define [], () ->
       return this
 
     sub: (x, y) =>
-      _handleArg x
+      @_handleArg x,
         'number': () ->
           @x -= x
           @x -= y
