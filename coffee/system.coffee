@@ -3,13 +3,13 @@ require [], () ->
     constructor: (@requiredComponents) ->
       @entities = []
 
-    addEntity: (entity) ->
+    addEntity: (entity) =>
       @entities[entity.id] = entity
       
-    removeEntity: (entity) ->
+    removeEntity: (entity) =>
       delete @entities[entity.id]
  
-    checkEntity: (entity) ->
+    checkEntity: (entity) =>
       for c in @requiredComponents
         if entity insanceof c
           addEntity entity
