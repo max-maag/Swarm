@@ -1,5 +1,6 @@
 require ['system'], (System) ->
-  class EntityProcessingSystem
+  class EntityProcessingSystem extends System
+  
 
     processEntity: (entity, dt) ->
 

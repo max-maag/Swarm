@@ -1,4 +1,4 @@
-require ['entity'], (Entity) ->
+require ['entity', 'testFactory'], (Entity, TestFactory) ->
   class EntityFactory
     factories = []
     
