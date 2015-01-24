@@ -2,5 +2,7 @@ define [], () ->
   class Entity
     @IDs
     
-    constructor: () ->
+    constructor: (components...) ->
       @id = @IDs++
+      for c in components
+        c.addToEntity this

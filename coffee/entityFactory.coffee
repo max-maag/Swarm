@@ -2,9 +2,9 @@ require ['entity'], (Entity) ->
   class EntityFactory
     factories = []
     
-    @register: (clazz, factory) ->
-      factories[clazz] = factory
+    @register: (name, factory) ->
+      factories[name] = factory
       
-    @for: (clazz) -> factories[clazz]
+    @for: (name) -> factories[clazz]
     
     build: () -> new Entity()
