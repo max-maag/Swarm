@@ -1,4 +1,4 @@
-define ["vector"], (Vector) ->
+define ["vector","tile"], (Vector,Tile) ->
   class Chunk
     ###
      * creates a chunk with level information
@@ -9,8 +9,13 @@ define ["vector"], (Vector) ->
     ###
     constructor: (@offset, @dimension, @tilesize, @worldGen) ->
       @tiles=[]
+      @tiles = [0...@dimension]
+      for x in [0...@tiles.length]
+        @tiles[x] = [0...@dimension]
+        for y in [0...@tiles[x].length]
+          @tiles[x][y]=new Tiles("none");
       @reconfigure()
-    
+
     ###
      * generates chunk at new position
      * @param {vec2} @offset new chunk offset
@@ -18,12 +23,7 @@ define ["vector"], (Vector) ->
     reconfigure: (offset) ->
       @offset=offset
 
-      @tiles = [0..@dimension]
-      for _, x in [0..@offset]
-        @tiles[x] = [0...@dimension]
-        for _, y in [0..@dimension]
-          @tiles[x][y].remove()
-          @tiles[x][y]=@worldGen.generate @ (new Vector x, y)
+      @worldGen.generate @
 
     ###
      * converts a global position to tile offsets
