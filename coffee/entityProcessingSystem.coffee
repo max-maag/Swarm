@@ -1,4 +1,4 @@
-require ['system'], (System) ->
+define ['system'], (System) ->
   class EntityProcessingSystem extends System
   
 

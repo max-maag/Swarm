@@ -1,4 +1,4 @@
-require ['entity', 'testFactory'], (Entity, TestFactory) ->
+define ['entity', 'testFactory'], (Entity, TestFactory) ->
   class EntityFactory
     factories = []
     

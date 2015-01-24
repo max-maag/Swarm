@@ -1,4 +1,4 @@
-require [], () ->
+define [], () ->
   class System
     constructor: (@requiredComponents) ->
       @entities = []
