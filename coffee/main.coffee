@@ -1,7 +1,3 @@
-require.config({
-  urlArgs: "bust=" + (new Date()).getTime()
-});
-
 require ['game'], (Game) ->
   input.init()
   
