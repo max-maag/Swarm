@@ -4,17 +4,18 @@ define ['perlinNoise'], (PerlinNoise) ->
     Generates a chunk
     ###
     constructor: () ->
-      @perlinNoise = new PerlinNoise Math.random()
+      @perl = new SimplexNoise
+      @noiseFactor = 20
 
       @tiles = [
         {
           name: "blue",
           isWall: true,
-          frequency: 40
+          frequency: 10
         }, {
           name: "orange",
           isWall: false,
-          frequency: 25
+          frequency: 30
         }, {
           name: "green",
           isWall: false,
@@ -32,8 +33,7 @@ define ['perlinNoise'], (PerlinNoise) ->
           freqSum = 0
           freqSum += tile.frequency for tile in @tiles
 
-          perlinRand = @perlinNoise.perlin(x+(chunk.offset.x*chunk.dimension), y+(chunk.offset.y*chunk.dimension))
-          perlinRand = ((perlinRand%1)+1)%1 # perlinRand mod 1
+          perlinRand = @perl.noise (x+(chunk.offset.x*chunk.dimension))/@noiseFactor, (y+(chunk.offset.y*chunk.dimension))/@noiseFactor
           threshold = freqSum * perlinRand
 
           freqSum = 0
@@ -42,6 +42,6 @@ define ['perlinNoise'], (PerlinNoise) ->
           for tile in @tiles
             freqSum += tile.frequency
             choosenTile = tile
-            if freqSum >= threshold then break
+            if freqSum > threshold then break
 
           chunk.tiles[x][y].update choosenTile.name, choosenTile.isWall
