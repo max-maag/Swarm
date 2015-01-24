@@ -5,5 +5,5 @@ define ['system'], (System) ->
     processEntity: (entity, dt) ->
 
     process: (dt) =>
-      for e in @entities
-        @processEntity e, dt
+      for k in Object.keys(@entities)
+        @processEntity @entities[k], dt
