@@ -4,7 +4,17 @@
   <title>Swarm</title>
 	<script type="text/javascript" src="lib/pixi.js"></script>
 	<script type="text/javascript" src="lib/lib_io.js"></script>
-	<script type="text/javascript" src="lib/require.js" data-main="js/main"></script>
+	<script type="text/javascript" src="lib/require.js"></script>
+  <script type="text/javascript">
+    requirejs.config({
+      baseUrl: 'js',
+      paths: {
+        'lib': '../lib'
+      }
+    });
+
+    require(['main'], function() {});
+  </script>
 	<style>
 		body {
 			margin: 0;
