@@ -6,4 +6,7 @@ define [], () ->
 		@param {boolean} @isWall true if the player can walk over this tile
 		###
 		constructor: (@name, @isWall) ->
+			update @name, @isWall
+
+		update: (@name, @isWall) ->
 			@sprite = PIXI.Sprite.fromImage "../res/img/tile_"+@name+".png"
