@@ -60,17 +60,17 @@ define [], () ->
 
       return this
 
-    mul: (x) ->
+    mul: (x) =>
       @x *= x
       @y *= x
       return this
 
-    dot: (v) ->
+    dot: (v) =>
       return @x * v.x + @y * v.y
 
-    lengthSquared: () -> @x * @x + @y * @y
+    lengthSquared: () => @x * @x + @y * @y
 
-    length: () -> Math.sqrt lengthSquared()
+    length: () => Math.sqrt @lengthSquared()
 
 
     # Static function #
