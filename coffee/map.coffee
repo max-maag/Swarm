@@ -8,9 +8,9 @@ define ["vector"], (Vector) ->
      * @param  {int} @tileSize        size of each tile
     ###
     constructor: (@position, @chunkThreshhold, @chunkDim, @tileSize) ->
-      @chunks = [0..(@chunkThreshhold*2)]
+      @chunks = [0..@chunkThreshhold]
       for x in @offset
-        @chunks = [0...(@chunkThreshhold*2)]
+        @chunks = [0...@chunkThreshhold]
         for y in @chunks[x]
           @offset[x][y]=new Chunk((new Vector x y), @chunkDim, @tilesize, @worldGen)
 
@@ -19,7 +19,7 @@ define ["vector"], (Vector) ->
     calculateBounds: () ->
       mapSize = ((@chunkDim*@tileSize)*@chunkThreshhold)
       topLeft =@toChunkOffset @position.sub (new Vector mapSize)
-      botRight=@toChunkOffset @position.sub (new Vector mapSize)
+      botRight=@toChunkOffset @position.add (new Vector mapSize)
       
       bounds =
         tl : topLeft
