@@ -23,7 +23,7 @@ define ["vector"], (Vector) ->
         @tiles[x] = [0...@dimension]
         for y in [0..@dimension]
           @tiles[x][y].remove()
-          @tiles[x][y]=@worldGen.generate @ (new Vector x y)
+          @tiles[x][y]=@worldGen.generate @ (new Vector x, y)
 
     ###
      * converts a global position to tile offsets
@@ -32,8 +32,8 @@ define ["vector"], (Vector) ->
     ###
     toTileOffset(pos) ->
       [
-        (math.floor (pos.x / @tilesize) / @dimension)-(@offset.x*@tilesize),
-        (math.floor (pos.y / @tilesize) / @dimension)-(@offset.y*@tilesize)
+        (Math.floor (pos.x / @tilesize) / @dimension)-(@offset.x*@tilesize),
+        (Math.floor (pos.y / @tilesize) / @dimension)-(@offset.y*@tilesize)
       ]
 
     ###
