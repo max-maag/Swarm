@@ -23,13 +23,15 @@ define [
     constructor: (@render, @stage, @gameContainer) ->
       @lastFrame = Date.now()
 
-      pos = new Vector(0, 0)
-      tres = 2
-      dim = 32
-      tilesize = 16
-      map = new Map(pos, tres, dim, tilesize, @gameContainer)
+      pos = new Vector(3, 3)
+      tres = 5
+      dim = 3
+      tilesize = 20
+      @map = new Map(pos, tres, dim, tilesize, @gameContainer)
+
 
       @world = new World()
+
 
       swarmSystem = new SwarmSystem()
       @world.addSystem swarmSystem
@@ -41,19 +43,32 @@ define [
 
       @world.addSystem new FpsCounterSystem @stage
 
-      swarmCount = 20
+      swarmCount = 50
       for i in [1..swarmCount]
         @world.addEntity TestFactory.build 200 + Math.cos(i/2/Math.PI), 200 + Math.sin(i/2/Math.PI)
-
 
       @world.addEntity FpsCounterFactory.build()
 
       window.onmousedown = (event) =>
         @world.addEntity new Entity(new InputEvent(event))
-       
-      #@world.addEntity GravitonFactory.build 300,300
+
+
+      @world.addEntity GravitonFactory.build 300,300
 
     step: () =>
+
+      if input.keyhit input.KEY.W
+        @map.move(new Vector(0,-8))
+
+      if input.keyhit input.KEY.S
+        @map.move(new Vector(0,8))
+
+      if input.keyhit input.KEY.A
+        @map.move(new Vector(-8,0))
+
+      if input.keyhit input.KEY.D
+        @map.move(new Vector(8,0))
+
       dt = Date.now() - @lastFrame
       requestAnimFrame @step
       @world.update dt
