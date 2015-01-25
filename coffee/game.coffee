@@ -41,9 +41,12 @@ define [
       @stage.addChild @menubar
 
       @mouse = PIXI.Sprite.fromImage "../res/img/mouse.png"
-      @mouse.position.x = 50
-      @mouse.position.y = 50
       @stage.addChild @mouse
+
+      @mouseicons = ['swarmentity', 'square']
+      @mouseiconid = 0
+      @mouseicon = PIXI.Sprite.fromImage "../res/img/swarmentity.png"
+      @stage.addChild @mouseicon
 
       pos = new Vector(0, 0)
       tres = 11
@@ -77,6 +80,8 @@ define [
       @renderview.onmousemove = (event) =>
         @mouse.position.x = event.offsetX
         @mouse.position.y = event.offsetY
+        @mouseicon.position.x = 6+event.offsetX
+        @mouseicon.position.y = 8+event.offsetY
 
       #@world.addEntity GravitonFactory.build 300,300
 
@@ -105,6 +110,14 @@ define [
 
       if input.keydown input.KEY.A
         @gameContainerAccelx += pixelstep
+
+      if input.keyhit input.KEY.E
+        newname = @mouseicons[((++@mouseiconid%@mouseicons.length)+@mouseicons.length)%@mouseicons.length]
+        @mouseicon.setTexture(PIXI.Texture.fromImage('../res/img/'+newname+'.png'))
+
+      if input.keyhit input.KEY.Q
+        newname = @mouseicons[((--@mouseiconid%@mouseicons.length)+@mouseicons.length)%@mouseicons.length]
+        @mouseicon.setTexture(PIXI.Texture.fromImage('../res/img/'+newname+'.png'))
 
       @timestep = 10
       while dt >= @timestep
