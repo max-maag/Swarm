@@ -9,6 +9,8 @@ define [
   'flowFactory'
   'fpsCounterFactory'
   'fpsCounterSystem'
+  'pointCounterFactory'
+  'pointCounterSystem'
   'swarmSystem'
   'inputSystem'
   'inputEvent'
@@ -19,7 +21,8 @@ define [
   'vector'
 ], (
   World, Renderer, Movement, LonelyMovement, EntityFactory, TestFactory, GravitonFactory,FlowFactory, FpsCounterFactory,
-  FpsCounterSystem, SwarmSystem, InputSystem, InputEvent, Entity, GravitonSystem,FlowSystem, Map, Vector) ->
+  FpsCounterSystem,PointCounterFactory,
+  PointCounterSystem,SwarmSystem, InputSystem, InputEvent, Entity, GravitonSystem,FlowSystem, Map, Vector) ->
 
   class Game
 
@@ -69,12 +72,14 @@ define [
       @world.addSystem new InputSystem @world, @gameContainer
 
       @world.addSystem new FpsCounterSystem @stage
+      @world.addSystem new PointCounterSystem @stage, swarmSystem
 
       swarmCount = 20
       for i in [1..swarmCount]
         @world.addEntity TestFactory.build 1500 + Math.cos(i/2/Math.PI), 1500 + Math.sin(i/2/Math.PI)
 
       @world.addEntity FpsCounterFactory.build()
+      @world.addEntity PointCounterFactory.build()
 
       @renderview.onmousedown = (event) =>
         @world.addEntity new Entity(new InputEvent(event))
@@ -85,7 +90,7 @@ define [
 
       #@world.addEntity GravitonFactory.build 300,300
 
-      @world.addEntity FlowFactory.build 300,300
+      @world.addEntity FlowFactory.build 1500,1500
 
 
     step: () =>

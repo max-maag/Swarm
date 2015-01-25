@@ -11,7 +11,7 @@ define ['entityProcessingSystem', 'fpsCounter'], (EntityProcessingSystem, FpsCou
       @container.addChild e.fpsCounter.view
       
     onEntityRemoved: (e) ->
-      @container.removeChild e.pfsCounter.view
+      @container.removeChild e.fpsCounter.view
       
     process: (dt) ->
       if (Date.now() - @curSeconds < 1000)
