@@ -14,7 +14,7 @@ require ['game'], (Game) ->
 
   game = new Game (() -> renderer.render stage), stage, gameContainer, renderer.view
 
-  assetLoader = new PIXI.AssetLoader ["../res/img/square.png"], true
+  assetLoader = new PIXI.AssetLoader ["../res/img/square.png","../res/img/tile_blue.png","../res/img/tile_green.png","../res/img/tile_orange.png"], true
 
   assetLoader.onComplete = () ->
     #window.setInterval game.step, 10
