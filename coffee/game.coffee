@@ -70,7 +70,7 @@ define [
 
       @world.addSystem new Movement
 
-      #@world.addSystem new TileCollisionSystem @map
+      @world.addSystem new TileCollisionSystem @map
 
       @world.addSystem new FlowSystem swarmSystem
       @world.addSystem new Renderer @gameContainer
