@@ -17,6 +17,8 @@ require ['game'], (Game) ->
   assetLoader = new PIXI.AssetLoader ["../res/img/square.png"], true
 
   assetLoader.onComplete = () ->
-    requestAnimFrame game.step
+    #window.setInterval game.step, 10
+    #requestAnimFrame game.step
+    requestAnimFrame game.renderloop
 
   assetLoader.load()

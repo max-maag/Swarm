@@ -21,11 +21,23 @@ define [
   class Game
 
     constructor: (@render, @stage, @gameContainer, @renderview) ->
-      @lastFrame = Date.now()
+      @gameContainerAccelx = 0
+      @gameContainerAccely = 0
 
-      pos = new Vector(3, 3)
-      tres = 5
-      dim = 3
+      @lastFrame = Date.now()
+      @timestep = 10
+
+      @fps = 0
+      @frameCount = 0
+      @curSeconds = Date.now()
+      @fpsview = new PIXI.Text "-- FPS", {font:"20px Arial", fill:"red"}
+      @fpsview.position.x = 10
+      @fpsview.position.y = 30
+      @stage.addChild @fpsview
+
+      pos = new Vector(0, 0)
+      tres = 11
+      dim = 5
       tilesize = 20
       @map = new Map(pos, tres, dim, tilesize, @gameContainer)
 
@@ -55,25 +67,48 @@ define [
       @world.addEntity GravitonFactory.build 300,300
 
     step: () =>
-
-      if input.keyhit input.KEY.W
-        @map.move(new Vector(0,-80))
-
-      if input.keyhit input.KEY.S
-        @map.move(new Vector(0,80))
-
-      if input.keyhit input.KEY.A
-        @map.move(new Vector(-80,0))
-
-      if input.keyhit input.KEY.D
-        @map.move(new Vector(80,0))
-
       dt = Date.now() - @lastFrame
-      requestAnimFrame @step
-      @world.update dt
-      @update dt
-      @render()
-      @lastFrame += dt
+      @steps++
+      #dt = Math.min Date.now() - @lastFrame, 200
 
-    update: (dt) =>
+      pixelstep = dt/5;
+      @gameContainerAccelx *= .9
+      @gameContainerAccely *= .9
+      @gameContainer.position.x += @gameContainerAccelx
+      @gameContainer.position.y += @gameContainerAccely
+      @map.move(new Vector(0,-@gameContainerAccely))
+      @map.move(new Vector(-@gameContainerAccelx,0))
+
+      if input.keydown input.KEY.S
+        @gameContainerAccely -= pixelstep
+
+      if input.keydown input.KEY.W
+        @gameContainerAccely += pixelstep
+
+      if input.keydown input.KEY.D
+        @gameContainerAccelx -= pixelstep
+
+      if input.keydown input.KEY.A
+        @gameContainerAccelx += pixelstep
+
+      @timestep = 10
+      while dt >= @timestep
+        @world.update @timestep
+        dt -= @timestep
+        @lastFrame += @timestep
+
       input.flushkeys()
+      #@step()
+
+    renderloop: () =>
+      if (Date.now() - @curSeconds < 1000)
+        @frameCount++
+      else
+        @fps = @frameCount
+        @frameCount = 1
+        @curSeconds = Date.now()
+        @fpsview.setText "#{@fps} FPS"
+
+      @step()
+      @render()
+      requestAnimFrame @renderloop
