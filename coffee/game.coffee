@@ -21,8 +21,8 @@ define [
   class Game
 
     constructor: (@render, @stage, @gameContainer, @renderview) ->
-      @gameContainerAccelx = -10
-      @gameContainerAccely = -10
+      @gameContainerAccelx = -150
+      @gameContainerAccely = -150
 
       @lastFrame = Date.now()
       @timestep = 10
@@ -34,6 +34,11 @@ define [
       @fpsview.position.x = 10
       @fpsview.position.y = 30
       @stage.addChild @fpsview
+
+      @menubar = PIXI.Sprite.fromImage "../res/img/menubar.png"
+      @menubar.position.x = 0
+      @menubar.position.y = 562-50
+      @stage.addChild @menubar
 
       @mouse = PIXI.Sprite.fromImage "../res/img/mouse.png"
       @mouse.position.x = 50
@@ -62,7 +67,7 @@ define [
 
       swarmCount = 50
       for i in [1..swarmCount]
-        @world.addEntity TestFactory.build 300 + Math.cos(i/2/Math.PI), 300 + Math.sin(i/2/Math.PI)
+        @world.addEntity TestFactory.build 1500 + Math.cos(i/2/Math.PI), 1500 + Math.sin(i/2/Math.PI)
 
       @world.addEntity FpsCounterFactory.build()
 
@@ -77,8 +82,9 @@ define [
 
     step: () =>
       dt = Date.now() - @lastFrame
-      @steps++
-      #dt = Math.min Date.now() - @lastFrame, 200
+      if dt > 1000
+        @lastFrame = Date.now()
+        return
 
       pixelstep = dt/5;
       @gameContainerAccelx *= .9
