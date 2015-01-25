@@ -27,6 +27,7 @@ define [], () ->
     foreach: (f) =>
       @x = f @x
       @y = f @y
+      return this
 
     set: (x, y) =>
       @_handleArg x,

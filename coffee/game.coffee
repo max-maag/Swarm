@@ -14,9 +14,11 @@ define [
   'gravitonSystem'
   'map'
   'vector'
+  'tileCollisionSystem'
 ], (
   World, Renderer, Movement, EntityFactory, TestFactory, GravitonFactory, FpsCounterFactory,
-  FpsCounterSystem, SwarmSystem, InputSystem, InputEvent, Entity, GravitonSystem, Map, Vector) ->
+  FpsCounterSystem, SwarmSystem, InputSystem, InputEvent, Entity, GravitonSystem, Map, Vector,
+  TileCollisionSystem) ->
 
   class Game
 
@@ -38,12 +40,13 @@ define [
       @world.addSystem new GravitonSystem swarmSystem
 
       @world.addSystem new Movement
+      @world.addSystem new TileCollisionSystem @map
       @world.addSystem new Renderer @gameContainer
       @world.addSystem new InputSystem @world
 
       @world.addSystem new FpsCounterSystem @stage
 
-      swarmCount = 50
+      swarmCount = 10
       for i in [1..swarmCount]
         @world.addEntity TestFactory.build 200 + Math.cos(i/2/Math.PI), 200 + Math.sin(i/2/Math.PI)
 

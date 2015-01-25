@@ -54,17 +54,15 @@ define ["vector","tile"], (Vector,Tile) ->
       @renderTexture.render(@tileContainer);
       @sprite.position.x = chunkVec.x
       @sprite.position.y = chunkVec.y
-      console.log "pos", @offset.toString(), chunkVec.toString()
 
     ###
      * converts a global position to tile offsets
      * @param {vec2} pos position to convert
      * @return {vec2} tile offset reltive to this tile
     ###
-    toTileOffset: (pos) ->
-      new Vector(
-        (Math.floor (pos.x / @tilesize) / @dimension)-(@offset.x*@tilesize),
-        (Math.floor (pos.y / @tilesize) / @dimension)-(@offset.y*@tilesize))
+    toTileOffset: (pos) =>
+      p = @tiles[0][0].pos
+      return Vector.sub(pos, p).mul(1/@tilesize).foreach(Math.floor)
 
     ###
      * determines if a tile is a wall
