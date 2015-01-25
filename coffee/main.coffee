@@ -1,4 +1,7 @@
 require ['game'], (Game) ->
+  if console
+    console.info "If you can read this, you probably don't see the game. Close the console on page load or the game breaks!"
+
   input.init()
   audioplayer.init()
 
