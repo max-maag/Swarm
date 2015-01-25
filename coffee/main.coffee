@@ -3,7 +3,6 @@ require ['game'], (Game) ->
     console.info "If you can read this, you probably don't see the game. Close the console on page load or the game breaks!"
 
   input.init()
-  audioplayer.init()
 
   stage = new PIXI.Stage 0xdddddd
   renderer = PIXI.autoDetectRenderer 999, 562 # ca. 16:9
