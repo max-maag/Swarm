@@ -19,11 +19,13 @@ define [
   'flowSystem'
   'map'
   'vector'
+  'tileCollisionSystem'
 ], (
-  World, Renderer, Movement, LonelyMovement, EntityFactory, TestFactory, GravitonFactory,FlowFactory, FpsCounterFactory,
-  FpsCounterSystem,PointCounterFactory,
-  PointCounterSystem,SwarmSystem, InputSystem, InputEvent, Entity, GravitonSystem,FlowSystem, Map, Vector) ->
-
+  World, Renderer, Movement, LonelyMovement, EntityFactory, TestFactory, GravitonFactory, FlowFactory, FpsCounterFactory,
+  FpsCounterSystem, PointCounterFactory,
+  PointCounterSystem,SwarmSystem, InputSystem, InputEvent, Entity, GravitonSystem, FlowSystem, Map, Vector,
+  TileCollisionSystem) ->
+  
   class Game
 
     constructor: (@render, @stage, @gameContainer, @renderview) ->
@@ -41,15 +43,18 @@ define [
       @fpsview.position.y = 30
       @stage.addChild @fpsview
 
-      @menubar = PIXI.Sprite.fromImage "../res/img/menubar.png"
-      @menubar.position.x = 0
-      @menubar.position.y = 562-50
-      @stage.addChild @menubar
+      #@menubar = PIXI.Sprite.fromImage "../res/img/menubar.png"
+      #@menubar.position.x = 0
+      #@menubar.position.y = 562-50
+      #@stage.addChild @menubar
 
       @mouse = PIXI.Sprite.fromImage "../res/img/mouse.png"
-      @mouse.position.x = 50
-      @mouse.position.y = 50
       @stage.addChild @mouse
+
+      @mouseicons = ['graviton', 'play']
+      @mouseiconid = 0
+      @mouseicon = PIXI.Sprite.fromImage "../res/img/"+@mouseicons[0]+".png"
+      @stage.addChild @mouseicon
 
       pos = new Vector(0, 0)
       tres = 11
@@ -67,14 +72,18 @@ define [
       @world.addSystem new LonelyMovement()
 
       @world.addSystem new Movement
+
+      @world.addSystem new TileCollisionSystem @map
+
       @world.addSystem new FlowSystem swarmSystem
       @world.addSystem new Renderer @gameContainer
-      @world.addSystem new InputSystem @world, @gameContainer
+      @world.addSystem new InputSystem @world, @gameContainer, @mouseiconid
 
       @world.addSystem new FpsCounterSystem @stage
       @world.addSystem new PointCounterSystem @stage, swarmSystem
 
-      swarmCount = 20
+      swarmCount = 10
+
       for i in [1..swarmCount]
         @world.addEntity TestFactory.build 1500 + Math.cos(i/2/Math.PI), 1500 + Math.sin(i/2/Math.PI)
 
@@ -82,15 +91,19 @@ define [
       @world.addEntity PointCounterFactory.build()
 
       @renderview.onmousedown = (event) =>
+        event.iconid = @mouseiconid
         @world.addEntity new Entity(new InputEvent(event))
 
       @renderview.onmousemove = (event) =>
         @mouse.position.x = event.offsetX
         @mouse.position.y = event.offsetY
+        @mouseicon.position.x = 20+event.offsetX
+        @mouseicon.position.y = 3+event.offsetY
 
       #@world.addEntity GravitonFactory.build 300,300
 
-      @world.addEntity FlowFactory.build 1500,1500
+      #@world.addEntity FlowFactory.build 300,300
+
 
 
     step: () =>
@@ -118,6 +131,14 @@ define [
 
       if input.keydown input.KEY.A
         @gameContainerAccelx += pixelstep
+
+      if input.keyhit input.KEY.E
+        newname = @mouseicons[((++@mouseiconid%@mouseicons.length)+@mouseicons.length)%@mouseicons.length]
+        @mouseicon.setTexture(PIXI.Texture.fromImage('../res/img/'+newname+'.png'))
+
+      if input.keyhit input.KEY.Q
+        newname = @mouseicons[((--@mouseiconid%@mouseicons.length)+@mouseicons.length)%@mouseicons.length]
+        @mouseicon.setTexture(PIXI.Texture.fromImage('../res/img/'+newname+'.png'))
 
       @timestep = 10
       while dt >= @timestep

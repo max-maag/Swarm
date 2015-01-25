@@ -4,9 +4,6 @@ define ["entityProcessingSystem","position","velocity", "acceleration","vector"]
     constructor : () ->
       super ["position", "velocity"]
     
-    processEntity : (e,dt) -> 
-      #e.acceleration.vector.add( Math.random*)
-      e.velocity.vector.add(Vector.mul(e.acceleration.vector , dt))
-      #e.velocity.vector.x *=(0.8 + Math.random() * 0.4)
-      #e.velocity.vector.y *=(0.8 + Math.random() * 0.4)
-      e.position.vector.add(Vector.mul(e.velocity.vector.mul(e.velocity.speed/ e.velocity.vector.length()), dt))
+    processEntity : (e,dt) => 
+      e.velocity.vector.add Vector.mul(e.acceleration.vector, dt)
+      e.position.vector.add(Vector.mul(e.velocity.vector.mul(e.velocity.speed/e.velocity.vector.length()), dt))

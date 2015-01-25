@@ -2,12 +2,11 @@ define [
   "entityFactory",
   "entity",
   "position",
-  "graviton"
- ], (EntityFactory, Entity, Position, Graviton) ->
+  "graviton",
+  "render"
+ ], (EntityFactory, Entity, Position, Graviton, Render) ->
   class TestFactory extends EntityFactory
     EntityFactory.register "name" ,new TestFactory()
-     
+
     @build: (x,y) ->
-      new Entity(new Position(x,y), new Graviton())
-    
-    
+      new Entity(new Position(x,y), new Graviton(), new Render(PIXI.Sprite.fromImage "../res/img/graviton.png"))

@@ -23,12 +23,17 @@ define ["vector", "chunk", "chunkGenerator"], (Vector, Chunk, ChunkGen) ->
      * @param  {vec2} position global position
      * @return {vec2}          chunk coordinates
     ###
-    toChunkOffset: (position) ->
+    toChunkOffset: (position) =>
       vector = new Vector(position)
       vector.mul (1/@tileSize)
       vector.mul (1/@chunkDim)
       vector.foreach Math.floor
+      ###
+      if(Vector.distSquared(new Vector(position).mul(1/@tileSize/@chunkDim).foreach(Math.floor), vector) > 0.5)
+        console.log "toChuckOffset wrong"
+      ###
       vector
+      
 
     ###
      * moves the map by a vector and generates new chunks according to chunkThreshold
