@@ -54,7 +54,6 @@ define ["vector","tile"], (Vector,Tile) ->
       @renderTexture.render(@tileContainer);
       @sprite.position.x = chunkVec.x
       @sprite.position.y = chunkVec.y
-      console.log "pos", @offset.toString(), chunkVec.toString()
 
     ###
      * converts a global position to tile offsets
