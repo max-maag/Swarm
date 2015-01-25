@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="48"
+   height="48"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   inkscape:export-filename="/home/marco/git/Swarm/res/img/mouse.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90"
+   sodipodi:docname="Neues Dokument 1">
+  <defs
+     id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="34.922389 : -4.4782389 : 1"
+       inkscape:vp_y="3.5731257 : 1468.1128 : 0"
+       inkscape:vp_z="149.33311 : -5.3803532 : 1"
+       inkscape:persp3d-origin="92.099163 : -16.674199 : 1"
+       id="perspective2989" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="5.6"
+     inkscape:cx="46.505914"
+     inkscape:cy="36.35896"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="681"
+     inkscape:window-x="0"
+     inkscape:window-y="23"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-1004.3622)">
+    <g
+       sodipodi:type="inkscape:box3d"
+       style="fill:#000080;fill-opacity:1;fill-rule:nonzero;stroke:#1e0000;stroke-width:10;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="g2991"
+       inkscape:perspectiveID="#perspective2989"
+       inkscape:corner0="-3.7428571 : -0.064654546 : 0 : 1"
+       inkscape:corner7="-7.1090909 : -0.079967348 : 0.25 : 1">
+      <path
+         sodipodi:type="inkscape:box3dside"
+         id="path2997"
+         style="fill:#000080;fill-rule:evenodd;stroke:none"
+         inkscape:box3dsidetype="3"
+         d="m 14.160915,1017.7877 11.439996,21.5188 0.009,-3.6799 -11.429004,-26.0351 z" />
+      <path
+         sodipodi:type="inkscape:box3dside"
+         id="path2993"
+         style="fill:#000080;fill-rule:evenodd;stroke:none"
+         inkscape:box3dsidetype="6"
+         d="m 14.160915,1017.7877 0.01995,-8.1962 -13.55395001,-4.8289 -0.0219485,9.0181 z" />
+      <path
+         sodipodi:type="inkscape:box3dside"
+         id="path2995"
+         style="fill:#000080;fill-rule:evenodd;stroke:none"
+         inkscape:box3dsidetype="5"
+         d="m 14.160915,1017.7877 11.439996,21.5188 -5.279496,-0.7866 -19.71645054,-24.7392 z" />
+      <path
+         sodipodi:type="inkscape:box3dside"
+         id="path3003"
+         style="fill:#000080;fill-rule:evenodd;stroke:none"
+         inkscape:box3dsidetype="11"
+         d="m 0.60496446,1013.7807 19.71645054,24.7392 0.0093,-3.8369 -19.70384001,-29.9204 z" />
+      <path
+         sodipodi:type="inkscape:box3dside"
+         id="path3001"
+         style="fill:#000080;fill-rule:evenodd;stroke:none"
+         inkscape:box3dsidetype="13"
+         d="m 14.180863,1009.5915 11.429004,26.0351 -5.279114,-0.9436 -19.70384001,-29.9204 z" />
+      <path
+         sodipodi:type="inkscape:box3dside"
+         id="path2999"
+         style="fill:#000080;fill-rule:evenodd;stroke:none"
+         inkscape:box3dsidetype="14"
+         d="m 25.600911,1039.3065 0.009,-3.6799 -5.279114,-0.9436 -0.0093,3.8369 z" />
+    </g>
+  </g>
+</svg>

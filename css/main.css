@@ -1,10 +1,12 @@
 body {
-	margin: 0;
+	margin: 1%;
 	padding: 0;
 	background-color: #000000;
 	text-align: center;
 }
 
-canvas {
-	margin: 1% auto;
+#canvaswrapper {
+	display: inline-block;
+	width:999px;
+	cursor: none;
 }

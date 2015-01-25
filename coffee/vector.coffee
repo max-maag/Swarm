@@ -25,8 +25,8 @@ define [], () ->
     # Member functions #
 
     foreach: (f) =>
-      f @x
-      f @y
+      @x = f @x
+      @y = f @y
 
     set: (x, y) =>
       @_handleArg x,
@@ -73,8 +73,29 @@ define [], () ->
 
     length: () => Math.sqrt @lengthSquared()
 
+    normalize: () =>
+      @mul 1/@length()
+
     toString: () =>
       "["+@x+","+@y+"]"
+
+    slerp: (x, y, t) =>
+      if !t?
+        t = y
+
+      v = @_handleArg x,
+        'number': () ->
+        'object': () -> x.normalize()
+
+      l = @length()
+      @normalize()
+
+      o = Math.acos @dot v
+      so = Math.sin o
+      @mul(Math.sin((1-t) * o) / so)
+      @add v.mul(Math.sin(t*o) / so)
+
+      @mul l
 
     # Static function #
 
@@ -95,3 +116,6 @@ define [], () ->
 
     @distSquared: (a, b, res = new Vector()) ->
       res.set(a).sub(b).lengthSquared()
+
+    @slerp: (a, b, t, res = new Vector()) ->
+      res.set(a).slerp(b, t)

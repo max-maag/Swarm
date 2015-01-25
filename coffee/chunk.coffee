@@ -10,10 +10,29 @@ define ["vector","tile"], (Vector,Tile) ->
     constructor: (@offset, @dimension, @tilesize, @chunkGen, @gameContainer) ->
       @tiles=[]
       @tiles = [0...@dimension]
+
+      @tileContainer = new PIXI.DisplayObjectContainer();
+
+      #create tiles
       for x in [0...@tiles.length]
         @tiles[x] = [0...@dimension]
         for y in [0...@tiles[x].length]
-          @tiles[x][y] = new Tile "none", false, @gameContainer, new Vector(), @tilesize
+          @tiles[x][y] = new Tile "none", false, @tileContainer, new Vector(), new Vector(), @tilesize
+
+      @texSize = @tilesize*@dimension
+      @renderTexture = new PIXI.RenderTexture @texSize, @texSize
+
+
+      @sprite = new PIXI.Sprite()
+      #@sprite.width = @tilesize/256*@dimension
+      #@sprite.height= @tilesize/256*@dimension
+      @sprite.setTexture @renderTexture
+      @gameContainer.addChild @sprite
+
+
+      posPerChunk = @dimension*@tilesize
+      chunkVec = new Vector @offset.x*posPerChunk, @offset.y*posPerChunk
+
       @reconfigure(@offset)
 
     ###
@@ -30,7 +49,11 @@ define ["vector","tile"], (Vector,Tile) ->
         for y in [0...@tiles[x].length]
           pos = new Vector x*@tilesize, y*@tilesize
           tilePos = Vector.add chunkVec, pos
-          @tiles[x][y].updatePos tilePos
+          @tiles[x][y].updatePos tilePos, x*@tilesize, y*@tilesize
+
+      @renderTexture.render(@tileContainer);
+      @sprite.position.x = chunkVec.x
+      @sprite.position.y = chunkVec.y
 
     ###
      * converts a global position to tile offsets
