@@ -25,7 +25,7 @@ define [
   FpsCounterSystem, PointCounterFactory,
   PointCounterSystem,SwarmSystem, InputSystem, InputEvent, Entity, GravitonSystem, FlowSystem, Map, Vector,
   TileCollisionSystem) ->
-  
+
   class Game
 
     constructor: (@render, @stage, @gameContainer, @renderview) ->
@@ -133,11 +133,13 @@ define [
         @gameContainerAccelx += pixelstep
 
       if input.keyhit input.KEY.E
-        newname = @mouseicons[((++@mouseiconid%@mouseicons.length)+@mouseicons.length)%@mouseicons.length]
+        @mouseiconid = ((++@mouseiconid%@mouseicons.length)+@mouseicons.length)%@mouseicons.length
+        newname = @mouseicons[@mouseiconid]
         @mouseicon.setTexture(PIXI.Texture.fromImage('../res/img/'+newname+'.png'))
 
       if input.keyhit input.KEY.Q
-        newname = @mouseicons[((--@mouseiconid%@mouseicons.length)+@mouseicons.length)%@mouseicons.length]
+        @mouseiconid = ((--@mouseiconid%@mouseicons.length)+@mouseicons.length)%@mouseicons.length
+        newname = @mouseicons[@mouseiconid]
         @mouseicon.setTexture(PIXI.Texture.fromImage('../res/img/'+newname+'.png'))
 
       @timestep = 10
