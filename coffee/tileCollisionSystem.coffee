@@ -31,11 +31,15 @@ define [
       
       if tile.isWall
         # determine direction out of tile
+        ###
         tmp = new Vector(tile.pos).add(tile.size/2, tile.size/2)
         tmp.sub(p).mul(-1)
         
         if(log)
           console.log "diff: (#{tmp.x}, #{tmp.y})"
+        ###
+        ###
+        tmp = new Vector(v).mul(-1)
         
         offset = 10
         if Math.abs(tmp.x) > Math.abs(tmp.y)
@@ -55,6 +59,8 @@ define [
           console.log "pushing + (#{tmp.x}, #{tmp.y})"
         # move
         p.add tmp
+        ###
+        p.add(new Vector(v).mul(-dt))
         
     ###
     lineLineIntersect: (p0, d0, p1, d1) ->

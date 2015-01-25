@@ -142,7 +142,7 @@ define [
         newname = @mouseicons[@mouseiconid]
         @mouseicon.setTexture(PIXI.Texture.fromImage('../res/img/'+newname+'.png'))
 
-      @timestep = 10
+      @timestep = 5
       while dt >= @timestep
         @world.update @timestep
         dt -= @timestep
