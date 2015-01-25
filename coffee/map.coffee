@@ -42,6 +42,7 @@ define ["vector", "chunk", "chunkGenerator"], (Vector, Chunk, ChunkGen) ->
 
       if (diff.x!=0) or (diff.y!=0)
         @position=new Vector newPos
+        console.log diff.toString()
 
       if (diff.x!=0)
         #need to generate new chunks
@@ -68,20 +69,24 @@ define ["vector", "chunk", "chunkGenerator"], (Vector, Chunk, ChunkGen) ->
         #need to generate new chunks
         if diff.y<0
           #moved up
-          newY = @chunks[0][0].offset.y-1
           for x in [0...@chunks.length] by 1
+
             column = @chunks[x]
             for y in [0...-diff.y] by 1
+              newY = column[0].offset.y-1
+
               shift = column.pop()
               column.unshift shift
 
               shift.reconfigure (new Vector @position.x+x, newY)
         else
           #moved down
-          newY = @chunks[0][@chunks[0].length-1].offset.y+1
           for x in [0...@chunks.length] by 1
+
             column = @chunks[x]
             for y in [0...diff.y] by 1
+              newY = column[@chunks[0].length-1].offset.y+1
+
               shift = column.shift()
               column.push shift
 

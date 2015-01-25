@@ -58,16 +58,16 @@ define [
     step: () =>
 
       if input.keyhit input.KEY.W
-        @map.move(new Vector(0,-8))
+        @map.move(new Vector(0,-80))
 
       if input.keyhit input.KEY.S
-        @map.move(new Vector(0,8))
+        @map.move(new Vector(0,80))
 
       if input.keyhit input.KEY.A
-        @map.move(new Vector(-8,0))
+        @map.move(new Vector(-80,0))
 
       if input.keyhit input.KEY.D
-        @map.move(new Vector(8,0))
+        @map.move(new Vector(80,0))
 
       dt = Date.now() - @lastFrame
       requestAnimFrame @step
