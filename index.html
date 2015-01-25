@@ -4,38 +4,14 @@
   <title>Swarm</title>
   <meta charset="utf-8">
   <script type="text/javascript" src="lib/pixi.js"></script>
-  <script type="text/javascript" src="lib/jquery-2.1.3.min.js"></script>
   <script type="text/javascript" src="lib/perlin-noise-simplex.js"></script>
   <script type="text/javascript" src="lib/lib_io.js"></script>
-  <script type="text/javascript" src="lib/audioplayer.js"></script>
   <script type="text/javascript" src="lib/require.js"></script>
   <link rel="stylesheet" type="text/css" href="css/main.css">
   <link rel="stylesheet" type="text/css" href="css/audioplayer.css">
 </head>
 <body>
   <div id="canvaswrapper"></div>
-
-  <div class="audioplayer">
-    <div class="head">
-      <span>HTML5 audioplayer</span>
-    </div>
-    <div class="progressbar">
-      <div class="bar"></div>
-    </div>
-    <div class="body">
-      <audio class="audioplayer-audioelement">
-        <p>Your browser does not support HTML5 audio!</p>
-      </audio>
-      <div class="audioplayer-prevbutton audioplayer-button"></div>
-      <div class="audioplayer-playbutton audioplayer-button playbutton-paused"></div>
-      <div class="audioplayer-nextbutton audioplayer-button"></div>
-      <div class="audioplayer-volumebutton">
-        <div class="audioplayer-volumebutton-speaker"></div>
-        <div class="audioplayer-volumebutton-volumebar"><div class="bar"></div></div>
-      </div>
-      <div class="audioplayer-durationdesc">0:00 / 0:00</div>
-    </div>
-  </div>
 
   <script type="text/javascript">
     requirejs.config({
