@@ -42,7 +42,6 @@ define ["vector", "chunk", "chunkGenerator"], (Vector, Chunk, ChunkGen) ->
 
       if (diff.x!=0) or (diff.y!=0)
         @position=new Vector newPos
-        console.log diff.toString()
 
       if (diff.x!=0)
         #need to generate new chunks
