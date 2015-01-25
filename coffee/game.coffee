@@ -35,6 +35,11 @@ define [
       @fpsview.position.y = 30
       @stage.addChild @fpsview
 
+      @mouse = PIXI.Sprite.fromImage "../res/img/mouse.png"
+      @mouse.position.x = 50
+      @mouse.position.y = 50
+      @stage.addChild @mouse
+
       pos = new Vector(0, 0)
       tres = 11
       dim = 5
@@ -51,7 +56,7 @@ define [
 
       @world.addSystem new Movement
       @world.addSystem new Renderer @gameContainer
-      @world.addSystem new InputSystem @world
+      @world.addSystem new InputSystem @world, @gameContainer
 
       @world.addSystem new FpsCounterSystem @stage
 
@@ -64,7 +69,11 @@ define [
       @renderview.onmousedown = (event) =>
         @world.addEntity new Entity(new InputEvent(event))
 
-      @world.addEntity GravitonFactory.build 300,300
+      @renderview.onmousemove = (event) =>
+        @mouse.position.x = event.offsetX
+        @mouse.position.y = event.offsetY
+
+      #@world.addEntity GravitonFactory.build 300,300
 
     step: () =>
       dt = Date.now() - @lastFrame

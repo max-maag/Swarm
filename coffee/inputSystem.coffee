@@ -4,12 +4,12 @@ define [
   'gravitonFactory'
 ], (InputEvent, EntityProcessingSystem, GravitonFactory) ->
   class InputSystem extends EntityProcessingSystem
-    constructor: (@world) ->
+    constructor: (@world, @gameContainer) ->
       super ['event']
 
     processEntity: (e, dt) ->
       switch e.event.type
-        when 'mousedown' then @world.addEntity GravitonFactory.build e.event.offsetX, e.event.offsetY
+        when 'mousedown' then @world.addEntity GravitonFactory.build e.event.offsetX-@gameContainer.position.x, e.event.offsetY-@gameContainer.position.y
         else console.log e.event.type
 
       @world.removeEntity e
