@@ -11,5 +11,6 @@ define ["entityProcessingSystem","vector"], (EntityProcessingSystem,Vector) ->
         dist = vec.length()
         ang = vec.dot(e.flow.vector) / dist / e.flow.vector.length()
         if(dist < e.flow.range and ang <= -e.flow.ang)
-          s.position.vector.add(Vector.mul(e.flow.vector,dt * (1 - dist/e.flow.range)))
+          s.velocity.flowVector.set(Vector.mul(e.flow.vector,(1 - dist/e.flow.range)))
+          console.log "set flow vector"
         

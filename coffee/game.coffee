@@ -71,9 +71,10 @@ define [
       @world.addSystem new GravitonSystem swarmSystem
       @world.addSystem new LonelyMovement()
 
+      @world.addSystem new FlowSystem swarmSystem
       @world.addSystem new Movement
 
-      @world.addSystem new FlowSystem swarmSystem
+      
       @world.addSystem new TileCollisionSystem @map
 
       @world.addSystem new Renderer @gameContainer

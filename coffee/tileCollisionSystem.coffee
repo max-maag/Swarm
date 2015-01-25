@@ -8,7 +8,7 @@ define [
     
     processEntity: (e, dt) =>
       p    = e.position.vector
-      v    = e.velocity.vector
+      v    = e.velocity.resultVector
       #negV = Vector.mul v -1
       
       chunkPos = @map.toChunkOffset(p).sub @map.position
