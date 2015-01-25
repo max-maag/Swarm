@@ -9,6 +9,8 @@ define [
   'flowFactory'
   'fpsCounterFactory'
   'fpsCounterSystem'
+  'pointCounterFactory'
+  'pointCounterSystem'
   'swarmSystem'
   'inputSystem'
   'inputEvent'
@@ -20,7 +22,8 @@ define [
   'tileCollisionSystem'
 ], (
   World, Renderer, Movement, LonelyMovement, EntityFactory, TestFactory, GravitonFactory, FlowFactory, FpsCounterFactory,
-  FpsCounterSystem, SwarmSystem, InputSystem, InputEvent, Entity, GravitonSystem, FlowSystem, Map, Vector,
+  FpsCounterSystem, PointCounterFactory,
+  PointCounterSystem,SwarmSystem, InputSystem, InputEvent, Entity, GravitonSystem, FlowSystem, Map, Vector,
   TileCollisionSystem) ->
 
   class Game
@@ -77,6 +80,7 @@ define [
       @world.addSystem new InputSystem @world, @gameContainer, @mouseiconid
 
       @world.addSystem new FpsCounterSystem @stage
+      @world.addSystem new PointCounterSystem @stage, swarmSystem
 
       swarmCount = 10
 
@@ -84,6 +88,7 @@ define [
         @world.addEntity TestFactory.build 1500 + Math.cos(i/2/Math.PI), 1500 + Math.sin(i/2/Math.PI)
 
       @world.addEntity FpsCounterFactory.build()
+      @world.addEntity PointCounterFactory.build()
 
       @renderview.onmousedown = (event) =>
         event.iconid = @mouseiconid
@@ -96,7 +101,9 @@ define [
         @mouseicon.position.y = 3+event.offsetY
 
       #@world.addEntity GravitonFactory.build 300,300
+
       #@world.addEntity FlowFactory.build 300,300
+
 
 
     step: () =>
@@ -126,11 +133,13 @@ define [
         @gameContainerAccelx += pixelstep
 
       if input.keyhit input.KEY.E
-        newname = @mouseicons[((++@mouseiconid%@mouseicons.length)+@mouseicons.length)%@mouseicons.length]
+        @mouseiconid = ((++@mouseiconid%@mouseicons.length)+@mouseicons.length)%@mouseicons.length
+        newname = @mouseicons[@mouseiconid]
         @mouseicon.setTexture(PIXI.Texture.fromImage('../res/img/'+newname+'.png'))
 
       if input.keyhit input.KEY.Q
-        newname = @mouseicons[((--@mouseiconid%@mouseicons.length)+@mouseicons.length)%@mouseicons.length]
+        @mouseiconid = ((--@mouseiconid%@mouseicons.length)+@mouseicons.length)%@mouseicons.length
+        newname = @mouseicons[@mouseiconid]
         @mouseicon.setTexture(PIXI.Texture.fromImage('../res/img/'+newname+'.png'))
 
       @timestep = 10
