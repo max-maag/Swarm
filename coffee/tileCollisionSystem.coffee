@@ -27,10 +27,15 @@ define [
       
       #console.log "entity at #{p.x}, #{p.y} in chunk #{chunkPos.x}, #{chunkPos.y}"
       
+      log = Math.random() > 0.01
+      
       if tile.isWall
         # determine direction out of tile
         tmp = new Vector(tile.pos).add(tile.size/2, tile.size/2)
-        Vector.sub p, tmp, tmp
+        tmp.sub(p).mul(-1)
+        
+        if(log)
+          console.log "diff: (#{tmp.x}, #{tmp.y})"
         
         offset = 10
         if Math.abs(tmp.x) > Math.abs(tmp.y)
@@ -46,7 +51,8 @@ define [
           else
             tmp.y = tile.pos.y - p.y - offset
         
-        console.log "pushing + (#{tmp.x}, #{tmp.y})"
+        if(log)
+          console.log "pushing + (#{tmp.x}, #{tmp.y})"
         # move
         p.add tmp
         
