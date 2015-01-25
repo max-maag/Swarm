@@ -12,7 +12,7 @@ require ['game'], (Game) ->
   stage.addChild gameContainer
   document.getElementById('canvaswrapper').appendChild renderer.view
 
-  game = new Game (() -> renderer.render stage), stage, gameContainer
+  game = new Game (() -> renderer.render stage), stage, gameContainer, renderer.view
 
   assetLoader = new PIXI.AssetLoader ["../res/img/square.png"], true
 

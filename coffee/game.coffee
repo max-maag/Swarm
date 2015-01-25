@@ -20,7 +20,7 @@ define [
 
   class Game
 
-    constructor: (@render, @stage, @gameContainer) ->
+    constructor: (@render, @stage, @gameContainer, @renderview) ->
       @lastFrame = Date.now()
 
       pos = new Vector(0, 0)
@@ -45,13 +45,12 @@ define [
       for i in [1..swarmCount]
         @world.addEntity TestFactory.build 200 + Math.cos(i/2/Math.PI), 200 + Math.sin(i/2/Math.PI)
 
-
       @world.addEntity FpsCounterFactory.build()
 
-      window.onmousedown = (event) =>
+      @renderview.onmousedown = (event) =>
         @world.addEntity new Entity(new InputEvent(event))
-       
-      #@world.addEntity GravitonFactory.build 300,300
+
+      @world.addEntity GravitonFactory.build 300,300
 
     step: () =>
       dt = Date.now() - @lastFrame
