@@ -10,15 +10,15 @@ define ['perlinNoise'], (PerlinNoise) ->
       @tiles = [
         {
           name: "blue",
-          isWall: true,
+          isWall: false,
           frequency: 10
         }, {
           name: "orange",
-          isWall: false,
+          isWall: true,
           frequency: 30
         }, {
           name: "green",
-          isWall: false,
+          isWall: true,
           frequency: 35
         }
       ]
