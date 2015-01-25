@@ -2,9 +2,11 @@ define [
   'world'
   'renderer'
   'movement'
+  'lonelyMovement'
   'entityFactory'
   'testFactory'
   'gravitonFactory'
+  'flowFactory'
   'fpsCounterFactory'
   'fpsCounterSystem'
   'swarmSystem'
@@ -12,11 +14,12 @@ define [
   'inputEvent'
   'entity'
   'gravitonSystem'
+  'flowSystem'
   'map'
   'vector'
 ], (
-  World, Renderer, Movement, EntityFactory, TestFactory, GravitonFactory, FpsCounterFactory,
-  FpsCounterSystem, SwarmSystem, InputSystem, InputEvent, Entity, GravitonSystem, Map, Vector) ->
+  World, Renderer, Movement, LonelyMovement, EntityFactory, TestFactory, GravitonFactory,FlowFactory, FpsCounterFactory,
+  FpsCounterSystem, SwarmSystem, InputSystem, InputEvent, Entity, GravitonSystem,FlowSystem, Map, Vector) ->
 
   class Game
 
@@ -61,14 +64,16 @@ define [
       swarmSystem = new SwarmSystem()
       @world.addSystem swarmSystem
       @world.addSystem new GravitonSystem swarmSystem
+      @world.addSystem new LonelyMovement()
 
       @world.addSystem new Movement
+      @world.addSystem new FlowSystem swarmSystem
       @world.addSystem new Renderer @gameContainer
       @world.addSystem new InputSystem @world, @gameContainer
 
       @world.addSystem new FpsCounterSystem @stage
 
-      swarmCount = 50
+      swarmCount = 20
       for i in [1..swarmCount]
         @world.addEntity TestFactory.build 1500 + Math.cos(i/2/Math.PI), 1500 + Math.sin(i/2/Math.PI)
 
@@ -84,6 +89,9 @@ define [
         @mouseicon.position.y = 8+event.offsetY
 
       #@world.addEntity GravitonFactory.build 300,300
+
+      @world.addEntity FlowFactory.build 300,300
+
 
     step: () =>
       dt = Date.now() - @lastFrame
