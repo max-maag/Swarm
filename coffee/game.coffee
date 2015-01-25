@@ -73,9 +73,9 @@ define [
 
       @world.addSystem new Movement
 
+      @world.addSystem new FlowSystem swarmSystem
       @world.addSystem new TileCollisionSystem @map
 
-      @world.addSystem new FlowSystem swarmSystem
       @world.addSystem new Renderer @gameContainer
       @world.addSystem new InputSystem @world, @gameContainer, @mouseiconid
 
