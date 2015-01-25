@@ -21,8 +21,8 @@ define [
   class Game
 
     constructor: (@render, @stage, @gameContainer, @renderview) ->
-      @gameContainerAccelx = 0
-      @gameContainerAccely = 0
+      @gameContainerAccelx = -10
+      @gameContainerAccely = -10
 
       @lastFrame = Date.now()
       @timestep = 10
@@ -62,7 +62,7 @@ define [
 
       swarmCount = 50
       for i in [1..swarmCount]
-        @world.addEntity TestFactory.build 200 + Math.cos(i/2/Math.PI), 200 + Math.sin(i/2/Math.PI)
+        @world.addEntity TestFactory.build 300 + Math.cos(i/2/Math.PI), 300 + Math.sin(i/2/Math.PI)
 
       @world.addEntity FpsCounterFactory.build()
 
