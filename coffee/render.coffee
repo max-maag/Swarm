@@ -3,5 +3,5 @@ define ["component"], (Component) ->
   
     constructor: (@sprite) -> 
       @name = "render"
-      @sprite.anchor.set 0.5 0.5
+      #@sprite.anchor.set 0.5 0.5
       
