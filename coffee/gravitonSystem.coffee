@@ -9,8 +9,8 @@ define ["entityProcessingSystem","vector","position","acceleration","graviton"],
         vec = Vector.sub(e.position.vector,s.position.vector)
         dist2 = Vector.distSquared(e.position.vector,s.position.vector)
         dist = Math.sqrt(dist2)
-        if(dist2 < e.graviton.range * e.graviton.range)
-          acc = e.graviton.force * dist / e.graviton.range
+        if(dist < e.graviton.range)
+          acc = e.graviton.force * (1 - dist / e.graviton.range)
           s.acceleration.vector.x += acc * vec.x / dist 
           s.acceleration.vector.y += acc * vec.y / dist  
       
